@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HKO Unified Lesson Template V2 — A2 HR English</title>
+<style>
+/* ============================================================
+   HKO UNIFIED LESSON TEMPLATE — CSS BIBLE v2.0
+   Blue #4B4F9C | Green #9C984B | BG cool #f3f7fc
+   Standard: HKO_MASTER_STANDARDS_V2.md
+   ============================================================ */
+
+:root{
+  --blue:#4B4F9C;
+  --blue-l:#eef1ff;
+  --green:#9C984B;
+  --green-l:#f7f4e7;
+  --bg:#f3f7fc;
+  --card:#ffffff;
+  --powder:#edf4f8;
+  --line:#d9e2ec;
+  --text:#24313a;
+  --muted:#7a8793;
+  --orange:#d46a1f;
+  --orange-l:#fff0e5;
+  --teal:#1f7a74;
+  --teal-l:#e5f4f3;
+  --berry:#b4476a;
+  --berry-l:#fdf0f4;
+  --red-l:#fff1f1;
+  --red-b:#f5b8b8;
+  --green-ok:#effaf3;
+  --green-ok-b:#b8dfc3;
+  --shadow:0 10px 28px rgba(32,45,58,.07);
+  --shadow-sm:0 4px 12px rgba(32,45,58,.05);
+  --r:16px;
+  --r-sm:10px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',Inter,'Segoe UI',Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:14px;
+  line-height:1.5;
+}
+img{max-width:100%;display:block;border-radius:14px}
+button,select,textarea,input{font:inherit}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,h5{margin:0;line-height:1.1}
+p{margin:0}
+
+/* ─── SHELL ─── */
+.shell{max-width:1280px;margin:0 auto;padding:18px 18px 80px}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 14px;margin-bottom:18px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);
+}
+.brand{display:flex;gap:10px;align-items:center}
+.logo{
+  width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--green));
+  color:#fff;font-weight:800;font-size:13px;letter-spacing:-.5px;flex-shrink:0;
+}
+.brand-text h1{font-size:.9rem;font-weight:700;color:var(--text)}
+.brand-text p{font-size:.76rem;color:var(--muted);margin-top:1px}
+.top-pills{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.pill{
+  padding:6px 11px;border-radius:999px;
+  background:#fff;border:1px solid var(--line);
+  font-size:.78rem;font-weight:800;color:var(--blue);
+  white-space:nowrap;
+}
+.pill.xp{color:var(--orange);border-color:#f0c898}
+.pill.prog{color:var(--teal);border-color:#b2d9d6}
+
+/* ─── LESSON HERO ─── */
+.lesson-hero{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:18px;
+  margin-bottom:18px;
+}
+.hero-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);padding:28px;
+}
+.hero-photo{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);padding:10px;
+}
+.hero-photo img{height:100%;min-height:340px;object-fit:cover;border-radius:12px;width:100%}
+.eyebrow{
+  display:inline-block;padding:5px 10px;border-radius:999px;
+  background:var(--orange-l);color:var(--orange);
+  font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hero-card h2{font-size:1.9rem;line-height:1.05;color:var(--green);margin-bottom:8px}
+.hero-card > p{color:#4c5862;max-width:58ch;font-size:.9rem}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:16px}
+.stat{padding:12px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.stat strong{display:block;font-size:1rem;color:var(--blue);font-weight:800}
+.stat span{font-size:.74rem;color:var(--muted);margin-top:1px;display:block}
+
+/* ─── CAN-DO CARD ─── */
+.can-do-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow-sm);
+  padding:18px;margin-bottom:18px;
+}
+.can-do-card h3{
+  color:var(--blue);font-size:.88rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;
+}
+.can-do-list{list-style:none;display:grid;gap:6px}
+.can-do-list li{
+  font-size:.87rem;color:#4c5862;padding:7px 10px;
+  background:var(--blue-l);border-radius:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.can-do-list li::before{content:"✓";color:var(--teal);font-weight:800}
+
+/* ─── STAGE NAVIGATOR ─── */
+.stage-nav{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow-sm);
+  padding:14px;margin-bottom:18px;
+}
+.stage-nav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.stage-nav-head h4{font-size:.78rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.progress-bar{height:5px;background:var(--line);border-radius:99px;flex:1;margin-left:14px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:99px;transition:width .4s ease;width:0%}
+.nav-row{display:flex;gap:6px;flex-wrap:wrap}
+.nav-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:7px 10px;border-radius:9px;border:1px solid var(--line);
+  font-size:.74rem;font-weight:800;cursor:pointer;
+  background:#f7f9fc;color:var(--muted);transition:all .15s;
+  white-space:nowrap;
+}
+.nav-btn.vocab{color:var(--blue);border-color:#c5cbe8;background:var(--blue-l)}
+.nav-btn.gram{color:var(--green);border-color:#d9d5a8;background:var(--green-l)}
+.nav-btn.active{box-shadow:0 0 0 2px var(--blue)}
+.nav-btn.complete::after{content:" ✓";font-size:.7rem}
+.nav-btn:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.08)}
+
+/* ─── SLIDE SHELL ─── */
+.slide{
+  display:grid;grid-template-columns:260px 1fr;gap:18px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);
+  padding:18px;margin-bottom:14px;
+  scroll-margin-top:84px;
+}
+.slide-side{display:flex;flex-direction:column;gap:10px}
+.stage-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 11px;border-radius:999px;
+  font-weight:800;font-size:.74rem;width:fit-content;
+}
+.stage-tag.v{background:var(--blue-l);color:var(--blue)}
+.stage-tag.g{background:var(--green-l);color:var(--green)}
+.slide-side h3{color:var(--blue);font-size:1.3rem;line-height:1.1;margin-top:4px}
+.slide-side p.side-desc{color:var(--muted);font-size:.85rem}
+
+/* ─── SIDE HELPERS ─── */
+.tbox{
+  padding:9px 12px;border-radius:10px;
+  background:#fff;border:1px solid var(--line);
+  font-size:.78rem;color:var(--muted);font-style:italic;
+}
+.tbox strong{font-style:normal;color:var(--blue);margin-right:4px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.audio-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 11px;border-radius:10px;
+  background:var(--orange-l);border:1px solid #f0c898;
+  font-size:.78rem;font-weight:700;color:var(--orange);cursor:pointer;
+  transition:all .15s;
+}
+.audio-btn:hover{background:#ffe4ca}
+.helper-box{
+  padding:9px 12px;border-radius:10px;
+  background:#fff8f0;border:1px solid #f0d9c0;
+  font-size:.8rem;color:#7a4f1e;
+}
+.helper-box strong{color:var(--orange);display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+
+/* ─── SLIDE MAIN ─── */
+.slide-main{display:grid;gap:12px}
+
+/* Layout helpers */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g12{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.g21{display:grid;grid-template-columns:.85fr 1.15fr;gap:12px}
+
+/* ─── IMAGE CARD ─── */
+.img-card{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:10px;
+}
+.img-card img{aspect-ratio:16/10;object-fit:cover;width:100%;border-radius:10px}
+.caption{font-size:.74rem;color:var(--muted);margin-top:6px}
+
+/* ─── ACTIVITY CARD ─── */
+.ac{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:14px;
+}
+.ac h4{color:var(--blue);font-size:.87rem;font-weight:800;margin-bottom:10px}
+.ac .es{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:-6px;margin-bottom:8px}
+
+/* ─── TARGET LANGUAGE ─── */
+.lang-t{
+  color:var(--blue);font-weight:700;
+  background:var(--blue-l);padding:1px 4px;border-radius:4px;
+}
+
+/* ─── PILL BANK ─── */
+.pill-bank{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.word-pill{
+  padding:8px 11px;border-radius:9px;
+  background:#f6f8fa;border:1px solid var(--line);
+  font-weight:700;font-size:.83rem;cursor:pointer;
+  transition:all .15s;
+}
+.word-pill:hover{background:var(--blue-l);border-color:#c5cbe8;color:var(--blue)}
+.word-pill.v{background:var(--blue-l);border-color:#c5cbe8;color:var(--blue)}
+.word-pill.g{background:var(--green-l);border-color:#d9d5a8;color:var(--green)}
+
+/* ─── MATCH GRID ─── */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.match-item{
+  padding:10px;border-radius:11px;
+  background:#f2f6fb;border:1px solid #d7e2ee;
+  font-size:.83rem;font-weight:600;cursor:pointer;
+  transition:all .15s;text-align:center;
+}
+.match-item:hover{border-color:var(--blue);background:var(--blue-l)}
+.match-item.selected{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.match-item.matched{border-color:var(--green-ok-b);background:var(--green-ok);color:#1a6e3c}
+.match-item.incorrect{border-color:var(--red-b);background:var(--red-l)}
+
+/* ─── CHOICE LIST ─── */
+.choice-list{display:grid;gap:7px}
+.choice{
+  padding:10px 13px;border-radius:11px;
+  border:1px solid var(--line);background:#fbfcfd;
+  font-size:.87rem;cursor:pointer;transition:all .15s;
+}
+.choice:hover{border-color:var(--blue);background:var(--blue-l)}
+.choice.correct{background:var(--green-ok);border-color:var(--green-ok-b);color:#1a6e3c}
+.choice.incorrect{background:var(--red-l);border-color:var(--red-b);color:#b33}
+.choice.warning{background:#fff7e9;border-color:#efd5a0;color:#8a6220}
+.choice.alt{background:#eff5fb;border-color:#cfe0f0}
+
+/* ─── SENTENCE FRAME ─── */
+.sentence-frame{
+  padding:13px;border-left:4px solid var(--orange);
+  background:#fff3e8;border-radius:12px;
+  font-size:.88rem;line-height:1.6;
+}
+.blank{
+  display:inline-block;min-width:90px;
+  border-bottom:2px solid var(--blue);
+  color:var(--blue);font-weight:700;
+  text-align:center;margin:0 3px;
+}
+
+/* ─── REORDER / TILES ─── */
+.tile-row{display:flex;flex-wrap:wrap;gap:7px}
+.tile{
+  padding:9px 12px;border-radius:10px;
+  background:#f2f6fb;border:1px solid #d4dff0;
+  font-weight:700;font-size:.83rem;cursor:grab;
+  transition:all .15s;
+}
+.tile:hover{background:var(--blue-l);border-color:var(--blue);color:var(--blue)}
+.tile.placed{background:var(--blue-l);border-color:var(--blue);color:var(--blue)}
+
+/* ─── MEMORY BOARD ─── */
+.memory-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mem-tile{
+  min-height:70px;padding:12px;border-radius:12px;
+  border:1px solid var(--line);background:#f2f6fb;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;font-weight:700;font-size:.83rem;
+  cursor:pointer;transition:all .2s;user-select:none;
+}
+.mem-tile.flipped{background:var(--blue-l);border-color:var(--blue);color:var(--blue)}
+.mem-tile.matched{background:var(--green-ok);border-color:var(--green-ok-b);color:#1a6e3c}
+
+/* ─── GAME BAR ─── */
+.game-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 13px;border-radius:11px;
+  background:#f7fafc;border:1px solid var(--line);
+  font-size:.82rem;font-weight:700;
+}
+.timer-count{color:var(--orange);font-size:1rem;font-weight:800}
+
+/* ─── GRAMMAR BOX ─── */
+.grammar-box{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;
+}
+.gb-head{
+  background:linear-gradient(90deg,var(--blue-l),var(--powder));
+  padding:12px 16px;border-bottom:1px solid var(--line);
+}
+.gb-eyebrow{font-size:.7rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.gb-head h4{color:var(--blue);font-size:.95rem;font-weight:800}
+.use-strip{
+  padding:8px 12px;
+  background:#fff9f0;border:1px solid #f5ddb8;
+  border-radius:8px;font-size:.82rem;color:#6b4b1e;
+  margin-top:8px;
+}
+.use-strip strong{color:var(--orange)}
+.gb-body{padding:14px}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line)}
+.table-wrap table{width:100%;border-collapse:collapse;font-size:.83rem}
+.table-wrap th{
+  background:var(--powder);font-size:.74rem;font-weight:800;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.05em;
+  padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;
+}
+.table-wrap td{padding:9px 12px;border-bottom:1px solid #f0f4f8;vertical-align:top}
+.table-wrap tr:last-child td{border-bottom:none}
+
+/* ─── RECORDING BLOCK ─── */
+.record-block{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:16px;
+}
+.record-block h4{color:var(--blue);font-size:.88rem;font-weight:800;margin-bottom:10px}
+.record-toolbar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 12px;background:var(--powder);border-radius:10px;
+  border:1px solid var(--line);margin-bottom:10px;
+}
+.record-prompt{font-size:.84rem;color:#4c5862;padding:10px;background:#f9fafb;border-radius:9px;font-style:italic}
+.rubric{display:grid;gap:6px;margin-top:10px}
+.rubric-row{
+  display:grid;grid-template-columns:110px 1fr;gap:8px;
+  font-size:.8rem;align-items:center;
+}
+.rubric-label{font-weight:700;color:var(--muted)}
+.rubric-bar{height:6px;background:var(--line);border-radius:99px}
+.rubric-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:99px;width:0%}
+
+/* ─── WRITING / EMAIL BLOCK ─── */
+.write-block{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:16px;
+}
+.write-block h4{color:var(--blue);font-size:.88rem;font-weight:800;margin-bottom:8px}
+.context-strip{
+  padding:9px 12px;border-left:4px solid var(--orange);
+  background:#fff8f2;border-radius:0 10px 10px 0;
+  font-size:.82rem;color:#5a3a1c;margin-bottom:10px;
+}
+textarea.write-area{
+  width:100%;border:1px solid var(--line);border-radius:10px;
+  padding:10px;font-size:.87rem;line-height:1.6;
+  resize:vertical;min-height:130px;
+  background:#fafcfe;color:var(--text);
+  transition:border .15s;
+}
+textarea.write-area:focus{outline:none;border-color:var(--blue);background:#fff}
+details.suggested{
+  border:1px dashed #d7dee4;border-radius:11px;
+  padding:9px 12px;background:#fafcfe;margin-top:8px;
+}
+details.suggested summary{cursor:pointer;font-weight:800;color:var(--orange);font-size:.82rem}
+details.suggested div{padding-top:8px;font-size:.84rem;line-height:1.7;color:#4c5862}
+
+/* ─── CONTROLS ROW ─── */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{
+  border:none;border-radius:10px;
+  padding:9px 13px;font-weight:800;font-size:.82rem;
+  cursor:pointer;transition:all .15s;
+}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:#3d4188}
+.btn.orange{background:var(--orange);color:#fff}
+.btn.orange:hover{background:#b85a14}
+.btn.soft{background:var(--blue-l);color:var(--blue);border:1px solid #c5cbe8}
+.btn.soft:hover{background:#dde3ff}
+.btn.ghost{background:#fff;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn.green{background:var(--teal);color:#fff}
+.btn.green:hover{background:#196661}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.controls{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;flex-wrap:wrap;margin-top:12px;
+  padding-top:10px;border-top:1px solid var(--line);
+}
+
+/* ─── FEEDBACK STRIP ─── */
+.feedback-strip{
+  padding:9px 12px;border-radius:10px;
+  font-size:.84rem;font-weight:700;
+  display:none;
+}
+.feedback-strip.ok{background:var(--green-ok);border:1px solid var(--green-ok-b);color:#1a6e3c}
+.feedback-strip.err{background:var(--red-l);border:1px solid var(--red-b);color:#c33}
+.feedback-strip.warn{background:#fff7e9;border:1px solid #efd5a0;color:#8a6220}
+
+/* ─── ACHIEVEMENT BAR ─── */
+.achievement{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 13px;border-radius:11px;
+  background:var(--berry-l);border:1px solid #e8c0cf;
+  font-size:.84rem;
+}
+.achievement strong{color:var(--berry)}
+
+/* ─── SECTION BREAK ─── */
+.section-break{
+  display:flex;align-items:center;gap:12px;margin:24px 0 16px;
+}
+.section-break h2{font-size:1.1rem;font-weight:800;color:var(--green);white-space:nowrap}
+.section-break hr{flex:1;border:none;border-top:2px solid var(--green-l)}
+
+/* ─── QUIZ SECTION ─── */
+.quiz-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);
+  padding:22px;margin-bottom:14px;
+}
+.quiz-card h3{font-size:1rem;font-weight:800;color:var(--blue);margin-bottom:4px}
+.quiz-card p{font-size:.87rem;color:var(--muted);margin-bottom:14px}
+.quiz-score{
+  font-size:1.2rem;font-weight:800;color:var(--teal);
+  padding:12px;background:var(--teal-l);border-radius:10px;text-align:center;
+  display:none;
+}
+.q-item{
+  background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:14px;margin-bottom:10px;
+}
+.q-item p.q-text{font-size:.88rem;font-weight:700;margin-bottom:10px;color:var(--text)}
+
+/* ─── WRAP-UP SECTION ─── */
+.wrap-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);
+  margin-bottom:14px;overflow:hidden;
+}
+.wrap-card-head{
+  padding:14px 18px;
+  background:linear-gradient(90deg,var(--green-l),var(--powder));
+  border-bottom:1px solid var(--line);
+}
+.wrap-card-head h3{color:var(--green);font-size:1rem;font-weight:800}
+.wrap-card-head p{color:var(--muted);font-size:.82rem;margin-top:3px}
+.wrap-card-body{padding:16px}
+
+/* Can-do self check */
+.cando-check-list{list-style:none;display:grid;gap:8px}
+.cando-check-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  border:1px solid var(--line);background:#fafbfd;
+  font-size:.87rem;cursor:pointer;transition:all .15s;
+}
+.cando-check-item input[type=checkbox]{accent-color:var(--teal);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.cando-check-item.checked{background:var(--green-ok);border-color:var(--green-ok-b)}
+
+/* Vocab list */
+.vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.vocab-item{
+  padding:9px 11px;border-radius:9px;
+  background:#f7f9fc;border:1px solid var(--line);
+  font-size:.83rem;
+}
+.vocab-item strong{color:var(--blue);display:block;font-weight:700}
+.vocab-item span{color:var(--muted);font-size:.76rem;font-style:italic}
+
+/* Extended grammar box (wrap-up) */
+.wrap-grammar{
+  background:#fff;border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;margin-bottom:12px;
+}
+.wg-head{
+  padding:12px 16px;background:linear-gradient(90deg,var(--blue-l),var(--powder));
+  border-bottom:1px solid var(--line);
+}
+.wg-head h4{color:var(--blue);font-size:.92rem;font-weight:800}
+.wg-body{padding:14px;display:grid;gap:12px}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini-card{
+  padding:12px;border-radius:11px;
+  background:#f7f9fc;border:1px solid var(--line);
+}
+.mini-card h4{color:var(--blue);font-size:.82rem;font-weight:800;margin-bottom:8px}
+.mini-list{display:grid;gap:5px}
+.mini-item{font-size:.8rem;color:var(--text)}
+
+/* Transcript */
+.transcript-box{
+  padding:14px;border-radius:12px;
+  background:#f9fafb;border:1px dashed var(--line);
+  font-size:.84rem;line-height:1.8;color:#4c5862;
+}
+.transcript-box p{margin-bottom:6px}
+.transcript-speaker{font-weight:800;color:var(--blue)}
+
+/* ─── FOOTER CARD ─── */
+.footer-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow-sm);
+  padding:18px;margin-top:28px;
+}
+.footer-card h3{font-size:.88rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.footer-card ul{padding-left:16px;display:grid;gap:6px}
+.footer-card li{font-size:.82rem;color:var(--muted)}
+.footer-card code{background:var(--bg);padding:1px 5px;border-radius:4px;font-family:'DM Mono',monospace;font-size:.8rem}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .lesson-hero{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  .slide{grid-template-columns:1fr}
+  .g2,.g3,.g12,.g21,.match-grid,.memory-board{grid-template-columns:1fr}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .mini-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     TOPBAR
+════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">HKO</div>
+    <div class="brand-text">
+      <h1>A2 HR English · Lesson 01</h1>
+      <p>I Started in HR Five Years Ago</p>
+    </div>
+  </div>
+  <div class="top-pills">
+    <span class="pill" id="stage-pill">Stage 1 of 14</span>
+    <span class="pill xp" id="xp-pill">⚡ 0 XP</span>
+    <span class="pill prog" id="prog-pill">Progress 0%</span>
+    <button class="btn ghost" style="font-size:.78rem;padding:6px 11px" onclick="saveProgress()">💾 Save</button>
+  </div>
+</div>
+
+<div class="shell">
+
+<!-- ═══════════════════════════════════════════
+     LESSON HERO
+════════════════════════════════════════════ -->
+<div class="lesson-hero">
+  <div class="hero-card">
+    <div class="eyebrow">📘 A2 · Lesson 01 · HR English · SENCE Chile</div>
+    <h2>I Started in HR Five Years Ago</h2>
+    <p>Talking about career history, past roles, and recruitment experiences in a professional context.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <strong>A2</strong>
+        <span>CEFR Level</span>
+      </div>
+      <div class="stat">
+        <strong>14</strong>
+        <span>Stages</span>
+      </div>
+      <div class="stat">
+        <strong>500</strong>
+        <span>XP Available</span>
+      </div>
+      <div class="stat">
+        <strong>12.5h</strong>
+        <span>Estimated Time</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <!-- Replace src with: GEN_A2_L01_IMG_SCENE_01_V1.jpg -->
+    <img src="GEN_A2_L01_IMG_SCENE_HERO_01_V1.jpg" alt="HR professional at desk reviewing CVs" onerror="this.style.background='linear-gradient(135deg,#eef1ff,#f7f4e7)';this.style.minHeight='340px';this.alt='';this.removeAttribute('onerror')">
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CAN-DO CARD
+════════════════════════════════════════════ -->
+<div class="can-do-card">
+  <h3>By the end of this lesson you can…</h3>
+  <ul class="can-do-list">
+    <li>Talk about where you worked and what you did in the past</li>
+    <li>Describe key moments in a recruitment process</li>
+    <li>Ask and answer questions about career history</li>
+    <li>Write a short professional summary of past experience</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     STAGE NAVIGATOR
+════════════════════════════════════════════ -->
+<div class="stage-nav">
+  <div class="stage-nav-head">
+    <h4>Lesson Stages</h4>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+  <div class="nav-row">
+    <button class="nav-btn vocab active" onclick="jumpTo('v1')" id="nav-v1">📷 V1</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v2')" id="nav-v2">🔤 V2</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v3')" id="nav-v3">🎯 V3</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v4')" id="nav-v4">🗂 V4</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v5')" id="nav-v5">🎮 V5</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v6')" id="nav-v6">✏️ V6</button>
+    <button class="nav-btn vocab" onclick="jumpTo('v7')" id="nav-v7">🎙 V7</button>
+    <button class="nav-btn gram" onclick="jumpTo('g1')" id="nav-g1">👁 G1</button>
+    <button class="nav-btn gram" onclick="jumpTo('g2')" id="nav-g2">🔀 G2</button>
+    <button class="nav-btn gram" onclick="jumpTo('g3')" id="nav-g3">🔲 G3</button>
+    <button class="nav-btn gram" onclick="jumpTo('g4')" id="nav-g4">✅ G4</button>
+    <button class="nav-btn gram" onclick="jumpTo('g5')" id="nav-g5">🛠 G5</button>
+    <button class="nav-btn gram" onclick="jumpTo('g6')" id="nav-g6">📝 G6</button>
+    <button class="nav-btn gram" onclick="jumpTo('g7')" id="nav-g7">📧 G7</button>
+  </div>
+</div>
+
+
+<!-- ╔═══════════════════════════════════════════
+     VOCABULARY PATH
+══════════════════════════════════════════════╗ -->
+
+<!-- ─── V1 — SCENE ENTRY ─── -->
+<div class="slide" id="v1" data-stage="v1">
+  <div class="slide-side">
+    <div class="stage-tag v">📷 Word Builder · Stage 1</div>
+    <h3>Look at the Scene</h3>
+    <p class="side-desc">Look at the image and the words below. What do you see?</p>
+    <div class="tbox"><strong>ES</strong> Mira la imagen. ¿Qué palabras conoces?</div>
+    <button class="audio-btn" onclick="playAudio('GEN_A2_L01_AUD_NARRATION_01_V1.mp3')">
+      🔊 Listen to the scene
+    </button>
+  </div>
+  <div class="slide-main">
+    <div class="g12">
+      <div class="img-card">
+        <img src="GEN_A2_L01_IMG_SCENE_01_V1.jpg" alt="HR team in an open-plan office, reviewing CVs and discussing candidates" onerror="this.style.background='#eef1ff';this.style.minHeight='200px'">
+        <div class="caption">An HR team reviews applications for a new role.</div>
+      </div>
+      <div class="ac">
+        <h4>Words from the scene</h4>
+        <div class="pill-bank randomize-group">
+          <span class="word-pill v">application</span>
+          <span class="word-pill v">candidate</span>
+          <span class="word-pill v">recruitment</span>
+          <span class="word-pill v">interview</span>
+          <span class="word-pill v">shortlist</span>
+          <span class="word-pill v">position</span>
+        </div>
+        <div style="margin-top:12px;font-size:.82rem;color:var(--muted)">Click a word to hear it pronounced.</div>
+      </div>
+    </div>
+    <div class="ac">
+      <h4>What can you see? Choose all that apply.</h4>
+      <p class="es">¿Qué puedes ver? Elige todas las opciones correctas.</p>
+      <div class="choice-list randomize-group" id="v1-choices">
+        <div class="choice" onclick="pickChoice(this,'correct')">People looking at documents together</div>
+        <div class="choice" onclick="pickChoice(this,'correct')">A modern office environment</div>
+        <div class="choice" onclick="pickChoice(this,'incorrect')">Someone working alone at home</div>
+        <div class="choice" onclick="pickChoice(this,'correct')">A professional meeting setting</div>
+      </div>
+    </div>
+    <div class="controls">
+      <span></span>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="retryStage('v1')">↩ Try Again</button>
+        <button class="btn primary" onclick="completeStage('v1','v2')">Next Stage →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V2 — GUIDED ACTIVATION ─── -->
+<div class="slide" id="v2" data-stage="v2">
+  <div class="slide-side">
+    <div class="stage-tag v">🔤 Word Builder · Stage 2</div>
+    <h3>Match the Words</h3>
+    <p class="side-desc">Match each word to its meaning. Click the first word, then its match.</p>
+    <div class="tbox"><strong>ES</strong> Une cada palabra con su significado.</div>
+    <div class="helper-box">
+      <strong>💡 Tip</strong>
+      Start with the words you already know. Leave the harder ones for last.
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="ac">
+      <h4>Match the word to the definition</h4>
+      <div class="match-grid randomize-group" id="v2-match">
+        <div class="match-item" data-pair="a">application</div>
+        <div class="match-item" data-pair="b">interview</div>
+        <div class="match-item" data-pair="c">candidate</div>
+        <div class="match-item" data-pair="d">shortlist</div>
+        <div class="match-item" data-pair="a">a request for a job</div>
+        <div class="match-item" data-pair="b">a formal meeting to discuss a role</div>
+        <div class="match-item" data-pair="c">a person who applies for a position</div>
+        <div class="match-item" data-pair="d">a reduced list of the best candidates</div>
+      </div>
+      <div class="feedback-strip" id="v2-fb"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v1')">← Back</button>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="retryStage('v2')">↩ Try Again</button>
+        <button class="btn primary" onclick="completeStage('v2','v3')">Next Stage →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V3 — CONTROLLED USE ─── -->
+<div class="slide" id="v3" data-stage="v3">
+  <div class="slide-side">
+    <div class="stage-tag v">🎯 Word Builder · Stage 3</div>
+    <h3>Complete the Sentences</h3>
+    <p class="side-desc">Choose the correct word for each gap.</p>
+    <div class="tbox"><strong>ES</strong> Elige la palabra correcta para cada espacio.</div>
+  </div>
+  <div class="slide-main">
+    <div class="ac">
+      <h4>Choose the best word for each sentence</h4>
+      <div style="display:grid;gap:14px">
+
+        <div>
+          <p style="margin-bottom:8px;font-size:.87rem">1. We received over 80 <span class="blank" id="b1">_________</span> for the sales role.</p>
+          <div class="pill-bank randomize-group">
+            <span class="word-pill" onclick="fillBlank('b1',this,'applications')">applications</span>
+            <span class="word-pill" onclick="fillBlank('b1',this,'interviews')">interviews</span>
+            <span class="word-pill" onclick="fillBlank('b1',this,'positions')">positions</span>
+          </div>
+        </div>
+
+        <div>
+          <p style="margin-bottom:8px;font-size:.87rem">2. The HR team created a <span class="blank" id="b2">_________</span> of six people.</p>
+          <div class="pill-bank randomize-group">
+            <span class="word-pill" onclick="fillBlank('b2',this,'shortlist')">shortlist</span>
+            <span class="word-pill" onclick="fillBlank('b2',this,'candidate')">candidate</span>
+            <span class="word-pill" onclick="fillBlank('b2',this,'recruitment')">recruitment</span>
+          </div>
+        </div>
+
+        <div>
+          <p style="margin-bottom:8px;font-size:.87rem">3. The best <span class="blank" id="b3">_________</span> had five years of experience.</p>
+          <div class="pill-bank randomize-group">
+            <span class="word-pill" onclick="fillBlank('b3',this,'candidate')">candidate</span>
+            <span class="word-pill" onclick="fillBlank('b3',this,'position')">position</span>
+            <span class="word-pill" onclick="fillBlank('b3',this,'shortlist')">shortlist</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn soft" onclick="checkBlanks(['b1:applications','b2:shortlist','b3:candidate'],'v3-fb')">✓ Check</button>
+        <button class="btn ghost" onclick="resetBlanks(['b1','b2','b3'])">↩ Reset</button>
+      </div>
+      <div class="feedback-strip" id="v3-fb"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v2')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v3','v4')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V4 — SORT / CLASSIFY ─── -->
+<div class="slide" id="v4" data-stage="v4">
+  <div class="slide-side">
+    <div class="stage-tag v">🗂 Word Builder · Stage 4</div>
+    <h3>Sort the Words</h3>
+    <p class="side-desc">Put each word in the right category: People, Actions, or Documents.</p>
+    <div class="tbox"><strong>ES</strong> Clasifica cada palabra en: Personas, Acciones o Documentos.</div>
+  </div>
+  <div class="slide-main">
+    <div class="g3">
+      <div class="ac">
+        <h4>👤 People</h4>
+        <div class="drop-zone" id="zone-people" ondragover="event.preventDefault()" ondrop="dropWord(event,'people')" style="min-height:80px;border:2px dashed var(--line);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start"></div>
+      </div>
+      <div class="ac">
+        <h4>⚙️ Actions</h4>
+        <div class="drop-zone" id="zone-actions" ondragover="event.preventDefault()" ondrop="dropWord(event,'actions')" style="min-height:80px;border:2px dashed var(--line);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start"></div>
+      </div>
+      <div class="ac">
+        <h4>📄 Documents</h4>
+        <div class="drop-zone" id="zone-docs" ondragover="event.preventDefault()" ondrop="dropWord(event,'docs')" style="min-height:80px;border:2px dashed var(--line);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start"></div>
+      </div>
+    </div>
+    <div class="ac">
+      <h4>Drag the words into the right category</h4>
+      <div class="pill-bank randomize-group" id="v4-bank">
+        <span class="word-pill" draggable="true" data-answer="people" ondragstart="dragStart(event)">candidate</span>
+        <span class="word-pill" draggable="true" data-answer="actions" ondragstart="dragStart(event)">interview</span>
+        <span class="word-pill" draggable="true" data-answer="docs" ondragstart="dragStart(event)">CV</span>
+        <span class="word-pill" draggable="true" data-answer="people" ondragstart="dragStart(event)">recruiter</span>
+        <span class="word-pill" draggable="true" data-answer="actions" ondragstart="dragStart(event)">shortlist</span>
+        <span class="word-pill" draggable="true" data-answer="docs" ondragstart="dragStart(event)">application form</span>
+      </div>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn soft" onclick="checkDropZones({'people':['candidate','recruiter'],'actions':['interview','shortlist'],'docs':['CV','application form']},'v4-fb')">✓ Check</button>
+      </div>
+      <div class="feedback-strip" id="v4-fb"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v3')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v4','v5')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V5 — MINI GAME ─── -->
+<div class="slide" id="v5" data-stage="v5">
+  <div class="slide-side">
+    <div class="stage-tag v">🎮 Word Builder · Stage 5</div>
+    <h3>Memory Game</h3>
+    <p class="side-desc">Flip two tiles to find matching word pairs. Remember what you've seen!</p>
+    <div class="tbox"><strong>ES</strong> Voltea dos fichas para encontrar parejas de palabras.</div>
+    <div class="game-bar" style="margin-top:auto">
+      <span>⚡ <strong id="mem-xp">0</strong> XP</span>
+      <span>Pairs: <strong id="mem-pairs">0</strong>/4</span>
+      <button class="btn ghost" style="font-size:.76rem;padding:5px 9px" onclick="initMemory()">↺ Reset</button>
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="achievement">
+      <span>Find all 4 pairs to unlock the next stage</span>
+      <strong id="mem-complete" style="display:none">🏆 Complete!</strong>
+    </div>
+    <div class="memory-board randomize-group" id="mem-board">
+      <!-- Tiles generated by JS -->
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v4')">← Back</button>
+      <button class="btn primary" id="v5-next" onclick="completeStage('v5','v6')" disabled>Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V6 — SHORT WRITTEN ANSWERS ─── -->
+<div class="slide" id="v6" data-stage="v6">
+  <div class="slide-side">
+    <div class="stage-tag v">✏️ Word Builder · Stage 6</div>
+    <h3>Write the Words</h3>
+    <p class="side-desc">Type the correct word or phrase to complete each sentence.</p>
+    <div class="tbox"><strong>ES</strong> Escribe la palabra o frase correcta.</div>
+    <div class="helper-box">
+      <strong>📌 Remember</strong>
+      Use only 1–3 words. No long sentences needed here.
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="ac">
+      <h4>Complete each item with a word from this lesson</h4>
+      <div style="display:grid;gap:12px">
+        <div>
+          <label style="font-size:.84rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">1. The person who applies for a job is called a…</label>
+          <input type="text" id="w1" placeholder="Type your answer…" style="width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.87rem;background:#fafbfe;transition:border .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'">
+        </div>
+        <div>
+          <label style="font-size:.84rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">2. A reduced list of the best applicants is called a…</label>
+          <input type="text" id="w2" placeholder="Type your answer…" style="width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.87rem;background:#fafbfe;transition:border .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'">
+        </div>
+        <div>
+          <label style="font-size:.84rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">3. The document you send to apply for a job is called an…</label>
+          <input type="text" id="w3" placeholder="Type your answer…" style="width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.87rem;background:#fafbfe;transition:border .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'">
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn soft" onclick="checkWritten({'w1':'candidate','w2':'shortlist','w3':'application'},'v6-fb')">✓ Check Answers</button>
+      </div>
+      <div class="feedback-strip" id="v6-fb"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v5')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v6','v7')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── V7 — RECORDED SPEAKING ─── -->
+<div class="slide" id="v7" data-stage="v7">
+  <div class="slide-side">
+    <div class="stage-tag v">🎙 Word Builder · Stage 7</div>
+    <h3>Speak and Record</h3>
+    <p class="side-desc">Record yourself answering the question. Listen back and check your answer.</p>
+    <div class="tbox"><strong>ES</strong> Grábate respondiendo la pregunta.</div>
+    <div class="achievement" style="margin-top:auto">
+      <span>🏆 <strong>Vocabulary Complete!</strong></span>
+      <span>Grammar section unlocks next</span>
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="record-block">
+      <h4>Tell us about your work experience</h4>
+      <div class="record-prompt">
+        Describe where you worked before and what you did. Use words from this lesson: <em>application, candidate, interview, shortlist, position, recruitment.</em>
+      </div>
+      <div class="record-toolbar" style="margin-top:10px">
+        <button class="btn orange" onclick="alert('Recording hook — connect to Moodle audio capture.')">🔴 Start Recording</button>
+        <button class="btn ghost" onclick="alert('Stop recording.')">⏹ Stop</button>
+        <button class="btn ghost" onclick="alert('Play back your recording.')">▶ Play Back</button>
+      </div>
+      <div class="rubric">
+        <h4 style="font-size:.82rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Speaking Rubric</h4>
+        <div class="rubric-row"><span class="rubric-label">Vocabulary</span><div class="rubric-bar"><div class="rubric-fill" style="width:0%"></div></div></div>
+        <div class="rubric-row"><span class="rubric-label">Fluency</span><div class="rubric-bar"><div class="rubric-fill" style="width:0%"></div></div></div>
+        <div class="rubric-row"><span class="rubric-label">Accuracy</span><div class="rubric-bar"><div class="rubric-fill" style="width:0%"></div></div></div>
+      </div>
+      <details class="suggested" style="margin-top:10px">
+        <summary>💡 Suggested Answer</summary>
+        <div>
+          "I worked in recruitment for three years. I reviewed applications and created shortlists for different positions. I also organised candidate interviews."
+        </div>
+      </details>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v6')">← Back</button>
+      <button class="btn green" onclick="completeStage('v7','g1')">Start Useful Language →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔═══════════════════════════════════════════
+     GRAMMAR PATH
+══════════════════════════════════════════════╗ -->
+<div class="section-break">
+  <h2>Useful Language</h2>
+  <hr>
+</div>
+
+<!-- ─── G1 — SCENE ENTRY ─── -->
+<div class="slide" id="g1" data-stage="g1">
+  <div class="slide-side">
+    <div class="stage-tag g">👁 Useful Language · Stage 1</div>
+    <h3>How Did They Say It?</h3>
+    <p class="side-desc">Can you remember what Paula said? Let's look at how she talked about the past.</p>
+    <div class="tbox"><strong>ES</strong> ¿Recuerdas lo que dijo Paula? Vamos a ver cómo habló del pasado.</div>
+    <button class="audio-btn" onclick="playAudio('GEN_A2_L01_AUD_DIALOGUE_01_V1.mp3')">
+      🔊 Listen again
+    </button>
+  </div>
+  <div class="slide-main">
+    <div class="g12">
+      <div class="ac">
+        <h4>Read what Paula said</h4>
+        <div style="display:grid;gap:8px;padding:4px">
+          <div style="padding:10px 13px;border-radius:10px;background:var(--blue-l);border:1px solid #c5cbe8;font-size:.88rem">
+            "I <span class="lang-t">started</span> in HR five years ago."
+          </div>
+          <div style="padding:10px 13px;border-radius:10px;background:var(--blue-l);border:1px solid #c5cbe8;font-size:.88rem">
+            "We <span class="lang-t">received</span> over 80 applications."
+          </div>
+          <div style="padding:10px 13px;border-radius:10px;background:var(--blue-l);border:1px solid #c5cbe8;font-size:.88rem">
+            "The interview <span class="lang-t">went</span> really well."
+          </div>
+          <div style="padding:10px 13px;border-radius:10px;background:var(--blue-l);border:1px solid #c5cbe8;font-size:.88rem">
+            "I <span class="lang-t">didn't expect</span> so many CVs."
+          </div>
+        </div>
+      </div>
+      <div class="ac">
+        <h4>What do you notice?</h4>
+        <div class="choice-list">
+          <div class="choice" onclick="pickChoice(this,'correct')">All the verbs describe finished actions in the past</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">The verbs describe things happening right now</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">The verbs are about future plans</div>
+        </div>
+        <div class="grammar-box" style="margin-top:12px">
+          <div class="gb-head">
+            <div class="gb-eyebrow">Useful Language</div>
+            <h4>Talking about the past</h4>
+            <div class="use-strip"><strong>We use this language to…</strong> describe career history, completed events, and past recruitment actions.</div>
+          </div>
+          <div class="gb-body">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Form</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td>Positive</td><td>I <span class="lang-t">started</span> in HR five years ago.</td></tr>
+                  <tr><td>Negative</td><td>I <span class="lang-t">didn't work</span> in finance.</td></tr>
+                  <tr><td>Question</td><td><span class="lang-t">Did</span> you work here before?</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('v7')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g1','g2')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G2 — COMPARE / SORT ─── -->
+<div class="slide" id="g2" data-stage="g2">
+  <div class="slide-side">
+    <div class="stage-tag g">🔀 Useful Language · Stage 2</div>
+    <h3>Sort the Sentences</h3>
+    <p class="side-desc">Which sentences talk about the past? Which talk about now?</p>
+    <div class="tbox"><strong>ES</strong> ¿Cuáles oraciones hablan del pasado? ¿Cuáles hablan del presente?</div>
+  </div>
+  <div class="slide-main">
+    <div class="g2">
+      <div class="ac">
+        <h4>🕐 Past</h4>
+        <div class="drop-zone" id="zone-past" ondragover="event.preventDefault()" ondrop="dropWord(event,'past')" style="min-height:100px;border:2px dashed var(--green-ok-b);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+      <div class="ac">
+        <h4>🔵 Present</h4>
+        <div class="drop-zone" id="zone-present" ondragover="event.preventDefault()" ondrop="dropWord(event,'present')" style="min-height:100px;border:2px dashed #c5cbe8;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+    <div class="ac">
+      <div class="pill-bank randomize-group" id="g2-bank">
+        <span class="word-pill" draggable="true" data-answer="past" ondragstart="dragStart(event)" style="font-size:.8rem">She started in HR two years ago.</span>
+        <span class="word-pill" draggable="true" data-answer="present" ondragstart="dragStart(event)" style="font-size:.8rem">She works in HR every day.</span>
+        <span class="word-pill" draggable="true" data-answer="past" ondragstart="dragStart(event)" style="font-size:.8rem">We received 40 applications last week.</span>
+        <span class="word-pill" draggable="true" data-answer="present" ondragstart="dragStart(event)" style="font-size:.8rem">We receive applications every month.</span>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g1')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g2','g3')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G3 — CONTROLLED FORMATION ─── -->
+<div class="slide" id="g3" data-stage="g3">
+  <div class="slide-side">
+    <div class="stage-tag g">🔲 Useful Language · Stage 3</div>
+    <h3>Complete the Frames</h3>
+    <p class="side-desc">Choose the correct form to complete each sentence.</p>
+    <div class="tbox"><strong>ES</strong> Elige la forma correcta para completar cada oración.</div>
+  </div>
+  <div class="slide-main">
+    <div class="ac">
+      <h4>Choose the right word to complete each sentence</h4>
+      <div style="display:grid;gap:14px">
+        <div>
+          <div class="sentence-frame">
+            I <span class="blank" id="g3b1">_______</span> in HR for 3 years before I moved to Chile.
+          </div>
+          <div class="pill-bank randomize-group" style="margin-top:8px">
+            <span class="word-pill" onclick="fillBlank('g3b1',this,'worked')">worked</span>
+            <span class="word-pill" onclick="fillBlank('g3b1',this,'work')">work</span>
+            <span class="word-pill" onclick="fillBlank('g3b1',this,'working')">working</span>
+          </div>
+        </div>
+        <div>
+          <div class="sentence-frame">
+            The team <span class="blank" id="g3b2">_______</span> meet all the candidates on the shortlist.
+          </div>
+          <div class="pill-bank randomize-group" style="margin-top:8px">
+            <span class="word-pill" onclick="fillBlank('g3b2',this,"didn't")">didn't</span>
+            <span class="word-pill" onclick="fillBlank('g3b2',this,'don't')">don't</span>
+            <span class="word-pill" onclick="fillBlank('g3b2',this,'wasn't')">wasn't</span>
+          </div>
+        </div>
+        <div>
+          <div class="sentence-frame">
+            <span class="blank" id="g3b3">_______</span> you find the right candidate in the end?
+          </div>
+          <div class="pill-bank randomize-group" style="margin-top:8px">
+            <span class="word-pill" onclick="fillBlank('g3b3',this,'Did')">Did</span>
+            <span class="word-pill" onclick="fillBlank('g3b3',this,'Do')">Do</span>
+            <span class="word-pill" onclick="fillBlank('g3b3',this,'Were')">Were</span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn soft" onclick="checkBlanks(['g3b1:worked','g3b2:didn\'t','g3b3:Did'],'g3-fb')">✓ Check</button>
+        <button class="btn ghost" onclick="resetBlanks(['g3b1','g3b2','g3b3'])">↩ Reset</button>
+      </div>
+      <div class="feedback-strip" id="g3-fb"></div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g2')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g3','g4')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G4 — QUICK ACCURACY CHECK ─── -->
+<div class="slide" id="g4" data-stage="g4">
+  <div class="slide-side">
+    <div class="stage-tag g">✅ Useful Language · Stage 4</div>
+    <h3>Choose the Best Line</h3>
+    <p class="side-desc">Which sentence is correct? Choose carefully.</p>
+    <div class="tbox"><strong>ES</strong> ¿Cuál oración es correcta? Elige con cuidado.</div>
+  </div>
+  <div class="slide-main">
+    <div style="display:grid;gap:14px">
+      <div class="ac">
+        <h4>1. Which is correct?</h4>
+        <div class="choice-list randomize-group">
+          <div class="choice" onclick="pickChoice(this,'correct')">She <span class="lang-t">started</span> the job last Monday.</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">She start the job last Monday.</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">She is started the job last Monday.</div>
+        </div>
+      </div>
+      <div class="ac">
+        <h4>2. Which is correct?</h4>
+        <div class="choice-list randomize-group">
+          <div class="choice" onclick="pickChoice(this,'incorrect')">We didn't received any applications.</div>
+          <div class="choice" onclick="pickChoice(this,'correct')">We <span class="lang-t">didn't receive</span> any applications.</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">We didn't receiving any applications.</div>
+        </div>
+      </div>
+      <div class="ac">
+        <h4>3. Which question is correct?</h4>
+        <div class="choice-list randomize-group">
+          <div class="choice" onclick="pickChoice(this,'incorrect')">Did you worked there long?</div>
+          <div class="choice" onclick="pickChoice(this,'incorrect')">Do you worked there long?</div>
+          <div class="choice" onclick="pickChoice(this,'correct')"><span class="lang-t">Did</span> you work there long?</div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g3')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g4','g5')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G5 — REPAIR / REBUILD ─── -->
+<div class="slide" id="g5" data-stage="g5">
+  <div class="slide-side">
+    <div class="stage-tag g">🛠 Useful Language · Stage 5</div>
+    <h3>Fix the Sentences</h3>
+    <p class="side-desc">Something is wrong in each sentence. Find it and fix it.</p>
+    <div class="tbox"><strong>ES</strong> Algo está mal en cada oración. Encuéntralo y corrígelo.</div>
+  </div>
+  <div class="slide-main">
+    <div class="ac">
+      <h4>Reorder the words to make a correct sentence</h4>
+      <div style="display:grid;gap:14px">
+        <div>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:6px">1. Rearrange these words:</p>
+          <div class="tile-row randomize-group" id="reorder1">
+            <span class="tile" draggable="true">years</span>
+            <span class="tile" draggable="true">five</span>
+            <span class="tile" draggable="true">ago</span>
+            <span class="tile" draggable="true">started</span>
+            <span class="tile" draggable="true">She</span>
+            <span class="tile" draggable="true">HR</span>
+            <span class="tile" draggable="true">in</span>
+          </div>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:6px">→ She started in HR five years ago.</p>
+        </div>
+        <div>
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:6px">2. This sentence has an error. Choose the corrected version:</p>
+          <div class="choice-list randomize-group">
+            <div class="choice" onclick="pickChoice(this,'incorrect')">Did he went to all the interviews?</div>
+            <div class="choice" onclick="pickChoice(this,'correct')">Did he <span class="lang-t">go</span> to all the interviews?</div>
+            <div class="choice" onclick="pickChoice(this,'incorrect')">Did he goes to all the interviews?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g4')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g5','g6')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G6 — FULL SENTENCE CONTROL ─── -->
+<div class="slide" id="g6" data-stage="g6">
+  <div class="slide-side">
+    <div class="stage-tag g">📝 Useful Language · Stage 6</div>
+    <h3>Write Full Sentences</h3>
+    <p class="side-desc">Write 4–5 sentences about your own work history.</p>
+    <div class="tbox"><strong>ES</strong> Escribe 4–5 oraciones sobre tu propia historia profesional.</div>
+    <div class="helper-box">
+      <strong>📌 Guide words</strong>
+      worked · started · joined · managed · reviewed · didn't · did
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="write-block">
+      <h4>Write about your work experience</h4>
+      <div class="context-strip">Write 4–5 sentences. Use the past form of verbs. Include at least one negative and one question form if you can.</div>
+      <textarea class="write-area" id="g6-text" placeholder="Example: I started my career in 2018. I worked in a small HR team…"></textarea>
+      <div class="btn-row">
+        <button class="btn soft" onclick="checkWrittenFree('g6-text','g6-fb',4)">✓ Check Length</button>
+      </div>
+      <div class="feedback-strip" id="g6-fb"></div>
+      <details class="suggested">
+        <summary>💡 Suggested Answer</summary>
+        <div>
+          "I started my first job in HR five years ago. I worked for a manufacturing company in Santiago. I managed the recruitment process and shortlisted candidates for three different roles. My team didn't use an HR software system at that time. Did you work in HR before this role?"
+        </div>
+      </details>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g5')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g6','g7')">Next Stage →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── G7 — PRACTICAL WRITING ─── -->
+<div class="slide" id="g7" data-stage="g7">
+  <div class="slide-side">
+    <div class="stage-tag g">📧 Useful Language · Stage 7</div>
+    <h3>Write a Professional Message</h3>
+    <p class="side-desc">Write a short email to a colleague describing a recent recruitment process.</p>
+    <div class="tbox"><strong>ES</strong> Escribe un correo breve a un colega describiendo un proceso de selección reciente.</div>
+    <div class="achievement" style="margin-top:auto">
+      <span>🏆 Final production stage!</span>
+      <strong>+50 XP on completion</strong>
+    </div>
+  </div>
+  <div class="slide-main">
+    <div class="write-block">
+      <h4>Write your email</h4>
+      <div class="context-strip">
+        <strong>Situation:</strong> You finished a recruitment process last week. Write to your manager, Maria, to summarise what happened. Include: how many applications you received, what the shortlist looked like, and how the interview went.
+      </div>
+      <textarea class="write-area" id="g7-text" placeholder="Hi Maria,&#10;&#10;I wanted to update you on the recruitment process...&#10;&#10;Best regards,&#10;[Your name]" style="min-height:180px"></textarea>
+      <div class="btn-row">
+        <button class="btn soft" onclick="checkWrittenFree('g7-text','g7-fb',4)">✓ Check</button>
+      </div>
+      <div class="feedback-strip" id="g7-fb"></div>
+      <details class="suggested">
+        <summary>💡 Suggested Answer</summary>
+        <div>
+          Hi Maria,<br><br>
+          I wanted to update you on the recruitment process for the HR Coordinator role.<br><br>
+          We received 45 applications last week. I reviewed them carefully and created a shortlist of six candidates. The interviews went very well — three candidates performed really strongly. I didn't expect such a high quality of applicants.<br><br>
+          I'll send you the final shortlist today.<br><br>
+          Best regards,<br>
+          Paula
+        </div>
+      </details>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" onclick="jumpTo('g6')">← Back</button>
+      <button class="btn green" onclick="completeStage('g7','quiz');addXP(50)">✅ Complete Lesson →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ╔═══════════════════════════════════════════
+     END-OF-LESSON MINI QUIZ (20 pts)
+══════════════════════════════════════════════╗ -->
+<div class="section-break" id="quiz">
+  <h2>Lesson Quiz</h2>
+  <hr>
+</div>
+
+<div class="quiz-card">
+  <h3>📋 End-of-Lesson Check · 20 points</h3>
+  <p>10 vocabulary points + 10 language points. A story continues — just like in the lesson.</p>
+  <div class="quiz-score" id="quiz-score"></div>
+
+  <!-- Q1 -->
+  <div class="q-item">
+    <p class="q-text">1. Paula <span class="lang-t">started</span> in HR five years ago. The word <em>started</em> is used because…</p>
+    <div class="choice-list randomize-group">
+      <div class="choice" onclick="quizPick(this,1,'a')">The action happened in the past and is finished.</div>
+      <div class="choice" onclick="quizPick(this,1,'b')">The action is happening right now.</div>
+      <div class="choice" onclick="quizPick(this,1,'c')">The action will happen in the future.</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-item">
+    <p class="q-text">2. Which sentence is correct?</p>
+    <div class="choice-list randomize-group">
+      <div class="choice" onclick="quizPick(this,2,'a')">We didn't received any applications.</div>
+      <div class="choice" onclick="quizPick(this,2,'b')">We didn't receive any applications.</div>
+      <div class="choice" onclick="quizPick(this,2,'c')">We don't received any applications.</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-item">
+    <p class="q-text">3. A reduced list of the best job applicants is called a…</p>
+    <div class="choice-list randomize-group">
+      <div class="choice" onclick="quizPick(this,3,'a')">candidate</div>
+      <div class="choice" onclick="quizPick(this,3,'b')">recruitment</div>
+      <div class="choice" onclick="quizPick(this,3,'c')">shortlist</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-item">
+    <p class="q-text">4. Maria asks about the interview. Which question is correct?</p>
+    <div class="choice-list randomize-group">
+      <div class="choice" onclick="quizPick(this,4,'a')">Did the interview went well?</div>
+      <div class="choice" onclick="quizPick(this,4,'b')">Did the interview go well?</div>
+      <div class="choice" onclick="quizPick(this,4,'c')">Does the interview went well?</div>
+    </div>
+  </div>
+
+  <!-- Q5 — vocab -->
+  <div class="q-item">
+    <p class="q-text">5. The person who applies for a job is called a…</p>
+    <div class="choice-list randomize-group">
+      <div class="choice" onclick="quizPick(this,5,'a')">recruiter</div>
+      <div class="choice" onclick="quizPick(this,5,'b')">candidate</div>
+      <div class="choice" onclick="quizPick(this,5,'c')">manager</div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="margin-top:16px">
+    <button class="btn primary" onclick="submitQuiz()">Submit Quiz →</button>
+    <button class="btn ghost" onclick="resetQuiz()">↩ Try Again</button>
+  </div>
+</div>
+
+
+<!-- ╔═══════════════════════════════════════════
+     WRAP-UP SECTION
+══════════════════════════════════════════════╗ -->
+<div class="section-break" id="wrapup">
+  <h2>Lesson Wrap-Up</h2>
+  <hr>
+</div>
+
+<!-- Can-Do Self Check -->
+<div class="wrap-card">
+  <div class="wrap-card-head">
+    <h3>✅ Can-Do Self Check</h3>
+    <p>Check everything you can do now. Be honest with yourself.</p>
+  </div>
+  <div class="wrap-card-body">
+    <ul class="cando-check-list">
+      <li class="cando-check-item" onclick="toggleCando(this)">
+        <input type="checkbox"> I can talk about where I worked and what I did in the past.
+      </li>
+      <li class="cando-check-item" onclick="toggleCando(this)">
+        <input type="checkbox"> I can describe a recruitment process using past verbs.
+      </li>
+      <li class="cando-check-item" onclick="toggleCando(this)">
+        <input type="checkbox"> I can ask questions about someone's career history.
+      </li>
+      <li class="cando-check-item" onclick="toggleCando(this)">
+        <input type="checkbox"> I understand the key recruitment vocabulary from this lesson.
+      </li>
+      <li class="cando-check-item" onclick="toggleCando(this)">
+        <input type="checkbox"> I can write a short professional message about a past event.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Vocabulary List -->
+<div class="wrap-card">
+  <div class="wrap-card-head">
+    <h3>📚 Vocabulary from This Lesson</h3>
+    <p>All the words and phrases you worked with today.</p>
+  </div>
+  <div class="wrap-card-body">
+    <div class="vocab-grid">
+      <div class="vocab-item"><strong>application</strong><span>una solicitud de empleo</span></div>
+      <div class="vocab-item"><strong>candidate</strong><span>candidato/a</span></div>
+      <div class="vocab-item"><strong>recruitment</strong><span>reclutamiento</span></div>
+      <div class="vocab-item"><strong>interview</strong><span>entrevista</span></div>
+      <div class="vocab-item"><strong>shortlist</strong><span>lista corta de finalistas</span></div>
+      <div class="vocab-item"><strong>position</strong><span>puesto de trabajo</span></div>
+      <div class="vocab-item"><strong>recruiter</strong><span>reclutador/a</span></div>
+      <div class="vocab-item"><strong>CV</strong><span>currículum vitae</span></div>
+      <div class="vocab-item"><strong>application form</strong><span>formulario de solicitud</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Extended Grammar / Useful Language Box -->
+<div class="wrap-card">
+  <div class="wrap-card-head">
+    <h3>📖 Useful Language — Extended Review</h3>
+    <p>A fuller look at the language from this lesson.</p>
+  </div>
+  <div class="wrap-card-body">
+    <div class="wrap-grammar">
+      <div class="wg-head">
+        <h4>Talking about career history and past events</h4>
+        <div class="use-strip"><strong>We use this language to…</strong> describe completed career actions, past recruitment processes, and professional history.</div>
+      </div>
+      <div class="wg-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Use</th><th>Positive</th><th>Negative</th><th>Question</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Career history</td>
+                <td>I <span class="lang-t">worked</span> in HR for 3 years.</td>
+                <td>I <span class="lang-t">didn't work</span> in finance.</td>
+                <td><span class="lang-t">Did</span> you work in HR before?</td>
+              </tr>
+              <tr>
+                <td>Recruitment action</td>
+                <td>We <span class="lang-t">received</span> 50 applications.</td>
+                <td>We <span class="lang-t">didn't receive</span> enough CVs.</td>
+                <td><span class="lang-t">Did</span> you receive many responses?</td>
+              </tr>
+              <tr>
+                <td>Irregular verb</td>
+                <td>The interview <span class="lang-t">went</span> well.</td>
+                <td>It <span class="lang-t">didn't go</span> as planned.</td>
+                <td><span class="lang-t">Did</span> the interview go well?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h4>Key Irregular Verbs</h4>
+            <div class="mini-list">
+              <div class="mini-item">go → <span class="lang-t">went</span></div>
+              <div class="mini-item">have → <span class="lang-t">had</span></div>
+              <div class="mini-item">find → <span class="lang-t">found</span></div>
+              <div class="mini-item">take → <span class="lang-t">took</span></div>
+              <div class="mini-item">get → <span class="lang-t">got</span></div>
+            </div>
+          </div>
+          <div class="mini-card">
+            <h4>Common Errors</h4>
+            <div class="mini-list">
+              <div class="mini-item">❌ She didn't <em>received</em> the email.</div>
+              <div class="mini-item">✅ She didn't <span class="lang-t">receive</span> the email.</div>
+              <div class="mini-item">❌ Did he <em>went</em> to the interview?</div>
+              <div class="mini-item">✅ Did he <span class="lang-t">go</span> to the interview?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Basic reinforcement -->
+    <div class="ac" style="margin-top:12px">
+      <h4>Quick practice — choose the correct form</h4>
+      <div class="choice-list randomize-group">
+        <div class="choice" onclick="pickChoice(this,'incorrect')">She didn't received the application.</div>
+        <div class="choice" onclick="pickChoice(this,'correct')">She <span class="lang-t">didn't receive</span> the application.</div>
+        <div class="choice" onclick="pickChoice(this,'incorrect')">She don't receive the application.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Transcript -->
+<div class="wrap-card">
+  <div class="wrap-card-head">
+    <h3>📄 Lesson Transcript</h3>
+    <p>The full text from the dialogue used in this lesson.</p>
+  </div>
+  <div class="wrap-card-body">
+    <div class="transcript-box">
+      <p><span class="transcript-speaker">Maria:</span> Hi Paula. How did the recruitment process go?</p>
+      <p><span class="transcript-speaker">Paula:</span> It went really well. We received over 80 applications in the first week. I didn't expect so many.</p>
+      <p><span class="transcript-speaker">Maria:</span> That's impressive. Did you find any strong candidates?</p>
+      <p><span class="transcript-speaker">Paula:</span> Yes, I shortlisted six people. The interviews were last Thursday. Three candidates stood out immediately.</p>
+      <p><span class="transcript-speaker">Maria:</span> How long have you worked in HR, Paula?</p>
+      <p><span class="transcript-speaker">Paula:</span> I started five years ago. I worked in a small team at first, then moved into a senior recruiter role two years later.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-card">
+  <h3>HKO Build Law — Template Standards V2</h3>
+  <ul>
+    <li>14 stages total: 7 vocabulary (V1–V7) + 7 useful language (G1–G7). Order fixed.</li>
+    <li>Vocabulary ends in recorded speaking production (V7). Grammar ends in professional writing (G7).</li>
+    <li>Every free production task includes a suggested-answer dropdown.</li>
+    <li>Every stage carries Back / Next / Save / Retry / Check as needed.</li>
+    <li>Interactive sets marked <strong>randomize-group</strong> shuffle items on load.</li>
+    <li>Recording blocks are Moodle-compatible hooks. "Grammar" never appears in learner-facing labels.</li>
+    <li>Spanish support is low-hierarchy only: smaller, lighter, italic, secondary.</li>
+    <li>End-of-lesson quiz: 20 points (10 vocab + 10 language). Progress quiz after L6: 40 points.</li>
+    <li>File name standard: <code>GEN_A2_L[NN]_HTML_LESSON_[SEQ]_V[N].html</code></li>
+  </ul>
+</div>
+
+</div><!-- .shell -->
+
+<script>
+/* ============================================================
+   HKO INTERACTION ENGINE — Unified v2.0
+   Standards: HKO_MASTER_STANDARDS_V2.md
+   ============================================================ */
+
+// ── STAGE SYSTEM ──
+const STAGES = ['v1','v2','v3','v4','v5','v6','v7','g1','g2','g3','g4','g5','g6','g7'];
+const completed = new Set();
+let currentStage = 'v1';
+let xp = 0;
+
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+    currentStage = id;
+    // Update nav active state
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+    // Update stage pill
+    const idx = STAGES.indexOf(id);
+    document.getElementById('stage-pill').textContent = 'Stage ' + (idx + 1) + ' of 14';
+  }
+}
+
+function completeStage(stageId, nextId) {
+  completed.add(stageId);
+  const navEl = document.getElementById('nav-' + stageId);
+  if (navEl) navEl.classList.add('complete');
+  addXP(20);
+  updateProgress();
+  if (nextId) {
+    setTimeout(() => jumpTo(nextId), 200);
+  }
+}
+
+function updateProgress() {
+  const pct = Math.round((completed.size / 14) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('prog-pill').textContent = 'Progress ' + pct + '%';
+}
+
+function saveProgress() {
+  const data = {xp, completed: [...completed], stage: currentStage};
+  try {
+    sessionStorage.setItem('hko_lesson_a2l01', JSON.stringify(data));
+    alert('Progress saved! (' + completed.size + '/14 stages complete)');
+  } catch(e) {
+    alert('Progress noted: ' + completed.size + '/14 stages complete.');
+  }
+}
+
+// ── XP SYSTEM ──
+function addXP(n) {
+  xp += n;
+  document.getElementById('xp-pill').textContent = '⚡ ' + xp + ' XP';
+}
+
+// ── RANDOMIZE GROUPS ──
+function shuffleGroup(group) {
+  const items = [...group.children];
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  items.forEach(item => group.appendChild(item));
+}
+document.querySelectorAll('.randomize-group').forEach(shuffleGroup);
+
+// ── CHOICE SELECTION ──
+function pickChoice(el, result) {
+  const siblings = el.closest('.choice-list').querySelectorAll('.choice');
+  siblings.forEach(s => s.classList.remove('correct','incorrect','warning'));
+  if (result === 'correct') { el.classList.add('correct'); addXP(10); }
+  else el.classList.add('incorrect');
+}
+
+// ── PILL BLANKS ──
+const blankAnswers = {};
+function fillBlank(blankId, el, answer) {
+  const blank = document.getElementById(blankId);
+  if (!blank) return;
+  // Reset siblings
+  el.closest('.pill-bank').querySelectorAll('.word-pill').forEach(p => {
+    p.style.background = '';
+    p.style.color = '';
+    p.style.borderColor = '';
+  });
+  blank.textContent = answer;
+  blank.style.color = 'var(--blue)';
+  blank.style.borderBottomColor = 'var(--green)';
+  blankAnswers[blankId] = answer;
+  el.style.background = 'var(--blue-l)';
+  el.style.color = 'var(--blue)';
+}
+
+function checkBlanks(pairs, fbId) {
+  let correct = 0;
+  pairs.forEach(p => {
+    const [id, ans] = p.split(':');
+    if ((blankAnswers[id] || '').toLowerCase() === ans.toLowerCase()) correct++;
+  });
+  const fb = document.getElementById(fbId);
+  if (!fb) return;
+  fb.style.display = 'block';
+  if (correct === pairs.length) {
+    fb.className = 'feedback-strip ok';
+    fb.textContent = '✅ All correct! +' + (correct * 15) + ' XP';
+    addXP(correct * 15);
+  } else {
+    fb.className = 'feedback-strip err';
+    fb.textContent = '❌ ' + correct + ' of ' + pairs.length + ' correct. Check the highlighted verbs again.';
+  }
+}
+
+function resetBlanks(ids) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = '_______'; el.style.color = ''; el.style.borderBottomColor = ''; }
+    delete blankAnswers[id];
+  });
+}
+
+// ── MATCH PAIRS ──
+let firstMatch = null;
+document.querySelectorAll('.match-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (item.classList.contains('matched')) return;
+    if (!firstMatch) {
+      firstMatch = item;
+      item.classList.add('selected');
+    } else {
+      if (firstMatch === item) { firstMatch.classList.remove('selected'); firstMatch = null; return; }
+      if (firstMatch.dataset.pair === item.dataset.pair) {
+        firstMatch.classList.remove('selected');
+        firstMatch.classList.add('matched');
+        item.classList.add('matched');
+        addXP(10);
+        firstMatch = null;
+      } else {
+        firstMatch.classList.add('incorrect');
+        item.classList.add('incorrect');
+        const a = firstMatch, b = item;
+        firstMatch.classList.remove('selected');
+        firstMatch = null;
+        setTimeout(() => { a.classList.remove('incorrect'); b.classList.remove('incorrect'); }, 800);
+      }
+    }
+  });
+});
+
+// ── MEMORY GAME ──
+const memPairs = [
+  ['application','solicitud'],
+  ['candidate','candidato'],
+  ['shortlist','lista corta'],
+  ['interview','entrevista']
+];
+let memFlipped = [];
+let memLock = false;
+let memPairsFound = 0;
+
+function initMemory() {
+  memFlipped = []; memLock = false; memPairsFound = 0;
+  document.getElementById('mem-pairs').textContent = '0';
+  document.getElementById('mem-complete').style.display = 'none';
+  document.getElementById('v5-next').disabled = true;
+  const board = document.getElementById('mem-board');
+  board.innerHTML = '';
+  const cards = [];
+  memPairs.forEach(([a,b]) => { cards.push({text:a,pair:a+b}); cards.push({text:b,pair:a+b}); });
+  cards.sort(() => Math.random() - .5);
+  cards.forEach(c => {
+    const t = document.createElement('div');
+    t.className = 'mem-tile';
+    t.textContent = '?';
+    t.dataset.text = c.text;
+    t.dataset.pair = c.pair;
+    t.addEventListener('click', () => flipMemTile(t));
+    board.appendChild(t);
+  });
+}
+initMemory();
+
+function flipMemTile(tile) {
+  if (memLock || tile.classList.contains('matched') || tile.classList.contains('flipped')) return;
+  tile.textContent = tile.dataset.text;
+  tile.classList.add('flipped');
+  memFlipped.push(tile);
+  if (memFlipped.length === 2) {
+    memLock = true;
+    const [a, b] = memFlipped;
+    if (a.dataset.pair === b.dataset.pair) {
+      a.classList.add('matched'); b.classList.add('matched');
+      a.classList.remove('flipped'); b.classList.remove('flipped');
+      memPairsFound++;
+      document.getElementById('mem-pairs').textContent = memPairsFound;
+      addXP(20);
+      memFlipped = []; memLock = false;
+      if (memPairsFound === memPairs.length) {
+        document.getElementById('mem-complete').style.display = 'inline';
+        document.getElementById('v5-next').disabled = false;
+        document.getElementById('mem-xp').textContent = xp;
+      }
+    } else {
+      setTimeout(() => {
+        a.textContent = '?'; b.textContent = '?';
+        a.classList.remove('flipped'); b.classList.remove('flipped');
+        memFlipped = []; memLock = false;
+      }, 900);
+    }
+  }
+}
+
+// ── DRAG & DROP ──
+let draggedEl = null;
+function dragStart(e) { draggedEl = e.target; }
+function dropWord(e, zone) {
+  if (!draggedEl) return;
+  e.preventDefault();
+  const clone = draggedEl.cloneNode(true);
+  clone.style.cursor = 'default';
+  clone.draggable = false;
+  document.getElementById('zone-' + zone).appendChild(clone);
+  draggedEl.style.opacity = '.4';
+  draggedEl = null;
+}
+
+function checkDropZones(expected, fbId) {
+  let correct = 0; let total = 0;
+  Object.entries(expected).forEach(([zone, words]) => {
+    const el = document.getElementById('zone-' + zone);
+    if (!el) return;
+    const dropped = [...el.querySelectorAll('.word-pill')].map(p => p.textContent.trim());
+    words.forEach(w => {
+      total++;
+      if (dropped.includes(w)) correct++;
+    });
+  });
+  const fb = document.getElementById(fbId);
+  if (!fb) return;
+  fb.style.display = 'block';
+  if (correct === total) {
+    fb.className = 'feedback-strip ok';
+    fb.textContent = '✅ All sorted correctly! +' + (total * 10) + ' XP';
+    addXP(total * 10);
+  } else {
+    fb.className = 'feedback-strip warn';
+    fb.textContent = '⚠️ ' + correct + ' of ' + total + ' correct. Try moving a few more items.';
+  }
+}
+
+// ── WRITTEN CHECK (words/phrases) ──
+function checkWritten(map, fbId) {
+  let correct = 0;
+  const total = Object.keys(map).length;
+  Object.entries(map).forEach(([fieldId, ans]) => {
+    const el = document.getElementById(fieldId);
+    if (!el) return;
+    const val = el.value.trim().toLowerCase();
+    if (val === ans.toLowerCase()) {
+      correct++;
+      el.style.borderColor = 'var(--teal)';
+      el.style.background = 'var(--green-ok)';
+    } else {
+      el.style.borderColor = 'var(--red-b)';
+      el.style.background = 'var(--red-l)';
+    }
+  });
+  const fb = document.getElementById(fbId);
+  if (!fb) return;
+  fb.style.display = 'block';
+  if (correct === total) {
+    fb.className = 'feedback-strip ok';
+    fb.textContent = '✅ All correct! Well done. +' + (correct * 15) + ' XP';
+    addXP(correct * 15);
+  } else {
+    fb.className = 'feedback-strip err';
+    fb.textContent = '❌ ' + correct + ' of ' + total + ' correct. Check the fields highlighted in red.';
+  }
+}
+
+// ── FREE WRITING CHECK (length gate) ──
+function checkWrittenFree(fieldId, fbId, minSentences) {
+  const el = document.getElementById(fieldId);
+  if (!el) return;
+  const text = el.value.trim();
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 3).length;
+  const fb = document.getElementById(fbId);
+  if (!fb) return;
+  fb.style.display = 'block';
+  if (sentences >= minSentences) {
+    fb.className = 'feedback-strip ok';
+    fb.textContent = '✅ Good! You wrote ' + sentences + ' sentences. Check the suggested answer when ready.';
+    addXP(25);
+    el.style.borderColor = 'var(--teal)';
+  } else {
+    fb.className = 'feedback-strip warn';
+    fb.textContent = '⚠️ Try to write at least ' + minSentences + ' sentences. You wrote ' + sentences + ' so far.';
+  }
+}
+
+// ── QUIZ SYSTEM ──
+const quizAnswers = {1:'a', 2:'b', 3:'c', 4:'b', 5:'b'};
+const quizSelected = {};
+
+function quizPick(el, q, opt) {
+  const parent = el.closest('.q-item').querySelectorAll('.choice');
+  parent.forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  quizSelected[q] = opt;
+}
+
+function submitQuiz() {
+  let score = 0;
+  const total = Object.keys(quizAnswers).length;
+  document.querySelectorAll('.q-item').forEach((item, i) => {
+    const q = i + 1;
+    const choices = item.querySelectorAll('.choice');
+    choices.forEach((c, ci) => {
+      const opts = ['a','b','c'];
+      c.classList.remove('correct','incorrect','selected');
+      if (quizAnswers[q] === opts[ci]) c.classList.add('correct');
+      else if (quizSelected[q] === opts[ci]) c.classList.add('incorrect');
+    });
+    if (quizSelected[q] === quizAnswers[q]) score++;
+  });
+  const pts = score * 4;
+  const scoreEl = document.getElementById('quiz-score');
+  scoreEl.style.display = 'block';
+  if (score >= total * 0.8) {
+    scoreEl.style.background = 'var(--green-ok)';
+    scoreEl.style.color = '#1a6e3c';
+    scoreEl.textContent = '🏆 Score: ' + pts + '/20 — Excellent! Lesson complete.';
+    addXP(pts * 2);
+  } else {
+    scoreEl.style.background = '#fff7e9';
+    scoreEl.style.color = '#8a6220';
+    scoreEl.textContent = '📋 Score: ' + pts + '/20 — Review the sections you missed and try again.';
+  }
+}
+
+function resetQuiz() {
+  Object.keys(quizSelected).forEach(k => delete quizSelected[k]);
+  document.querySelectorAll('.q-item .choice').forEach(c => c.classList.remove('correct','incorrect','selected'));
+  document.getElementById('quiz-score').style.display = 'none';
+}
+
+// ── CAN-DO TOGGLE ──
+function toggleCando(item) {
+  const cb = item.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  item.classList.toggle('checked', cb.checked);
+}
+
+// ── AUDIO PLACEHOLDER ──
+function playAudio(src) {
+  try {
+    const a = new Audio(src);
+    a.play().catch(() => console.log('Audio hook:', src));
+  } catch(e) {
+    console.log('Audio hook — connect to:', src);
+  }
+}
+
+// ── RETRY STAGE ──
+function retryStage(stageId) {
+  const el = document.getElementById(stageId);
+  if (!el) return;
+  el.querySelectorAll('.choice').forEach(c => c.classList.remove('correct','incorrect','warning','selected'));
+  el.querySelectorAll('.feedback-strip').forEach(f => { f.style.display = 'none'; f.textContent = ''; });
+  el.querySelectorAll('input[type=text],textarea').forEach(i => { i.value = ''; i.style.borderColor = ''; i.style.background = ''; });
+}
+
+</script>
+</body>
+</html>
