@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HKO · A2 · L[LESSON_NUM] · [LESSON_TITLE]</title>
+<style>
+/* ============================================================
+   HKO MASTER LESSON SYSTEM v3.0
+   Modular · Gamified · Swappable · LMS-Ready
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap');
+
+:root {
+  --ink:#0f1923; --ink2:#3d4f5c;
+  --blue:#3b5bdb; --blue-l:#e8ecfd; --blue-m:#c5cff8;
+  --green:#2f9e44; --green-l:#ebfbee;
+  --amber:#f08c00; --amber-l:#fff4de;
+  --red:#e03131; --red-l:#fff0f0;
+  --teal:#0c8599; --teal-l:#e3fafc;
+  --berry:#9c36b5; --berry-l:#f8f0ff;
+  --bg:#f4f6fb; --card:#fff;
+  --line:#e2e8f0; --muted:#7a8fa6;
+  --r:12px; --r-sm:8px;
+  --shadow:0 2px 12px rgba(15,25,35,.08);
+  --shadow-md:0 6px 24px rgba(15,25,35,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.55}
+
+/* ── TOPBAR ── */
+.topbar{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:8px 16px}
+.logo-box{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--teal));display:grid;place-items:center;color:#fff;font-family:'Syne',sans-serif;font-weight:800;font-size:11px;flex-shrink:0}
+.lesson-id{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:var(--ink)}
+.lesson-id span{color:var(--muted);font-weight:500}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.xp-badge{background:var(--amber-l);border:1px solid #ffd480;color:var(--amber);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:99px}
+.prog-wrap{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);font-weight:700}
+.prog-bar{width:80px;height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:99px;transition:width .4s}
+
+/* ── SHELL ── */
+.shell{max-width:860px;margin:0 auto;padding:16px 14px 80px}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0f1923 0%,#1c3a5e 100%);border-radius:16px;overflow:hidden;margin-bottom:14px;position:relative;display:grid;grid-template-columns:1fr 220px}
+.hero-text{padding:24px;position:relative;z-index:1}
+.hero-tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:10px}
+.hero-text h1{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:8px}
+.hero-text p{font-size:.85rem;color:rgba(255,255,255,.65);max-width:36ch}
+.hero-stats{display:flex;gap:12px;margin-top:14px}
+.hstat{text-align:center;background:rgba(255,255,255,.08);border-radius:8px;padding:7px 12px}
+.hstat strong{display:block;color:#fff;font-size:.95rem;font-family:'Syne',sans-serif}
+.hstat span{color:rgba(255,255,255,.5);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}
+.hero-img{background:linear-gradient(135deg,rgba(59,91,219,.4),rgba(12,133,153,.4));display:flex;align-items:center;justify-content:center;min-height:200px;position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.hero-img .img-ph{font-size:3rem;opacity:.3}
+
+/* ── CAN DO ── */
+.cando{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px;display:flex;gap:14px;align-items:flex-start}
+.cando-icon{width:32px;height:32px;background:var(--blue-l);border-radius:8px;display:grid;place-items:center;font-size:1rem;flex-shrink:0}
+.cando ul{list-style:none;display:grid;gap:4px}
+.cando li{font-size:.83rem;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.cando li::before{content:'→';color:var(--green);font-weight:800;flex-shrink:0}
+
+/* ── STAGE NAV ── */
+.stage-nav{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-bottom:14px}
+.stage-nav-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.snav-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:7px;font-size:.72rem;font-weight:700;cursor:pointer;border:1px solid var(--line);background:#f7f9fc;color:var(--muted);transition:all .15s;white-space:nowrap}
+.snav-btn.v{color:var(--blue);border-color:var(--blue-m);background:var(--blue-l)}
+.snav-btn.g{color:var(--green);border-color:#b2d9bc;background:var(--green-l)}
+.snav-btn.active{outline:2px solid currentColor;outline-offset:1px}
+.snav-btn.done::after{content:' ✓';opacity:.7}
+.snav-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+
+/* ── STAGE WRAPPER ── */
+.stage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;scroll-margin-top:68px}
+.stage-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fafbfe,#f4f7ff)}
+.stage-badge{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.badge-v{background:var(--blue-l);color:var(--blue)}
+.badge-g{background:var(--green-l);color:var(--green)}
+.stage-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--ink)}
+.stage-body{padding:14px 16px;display:grid;gap:12px}
+
+/* ── TWO COL ── */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* ── IMAGE BLOCK ── */
+.img-block{background:#f0f3f8;border-radius:10px;overflow:hidden;position:relative}
+.img-block img{width:100%;height:100%;object-fit:cover;display:block;min-height:160px}
+.img-block .ph{min-height:160px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-size:.8rem}
+.img-block .ph .ico{font-size:2.2rem;opacity:.4}
+.img-caption{font-size:.73rem;color:var(--muted);padding:6px 10px;font-style:italic}
+
+/* ── INSTRUCTION ── */
+.instr{font-size:.83rem;color:var(--ink2);font-weight:500}
+.es{font-size:.77rem;color:var(--muted);font-style:italic;margin-top:2px}
+.instr-box{background:var(--blue-l);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:8px 12px}
+
+/* ── CHOICE ACTIVITY ── */
+.choices{display:grid;gap:7px}
+.choice{padding:9px 13px;border-radius:9px;border:1.5px solid var(--line);background:#fafbfc;font-size:.85rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px}
+.choice:hover{border-color:var(--blue);background:var(--blue-l)}
+.choice .mark{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;transition:all .15s}
+.choice.correct{background:var(--green-l);border-color:#7cc090;color:var(--green)}
+.choice.correct .mark{background:var(--green);border-color:var(--green);position:relative}
+.choice.correct .mark::after{content:'✓';color:#fff;font-size:.65rem;position:absolute;inset:0;display:grid;place-items:center}
+.choice.wrong{background:var(--red-l);border-color:#f4b8b8;color:var(--red)}
+.choice.chosen{border-color:var(--blue);background:var(--blue-l)}
+
+/* ── MATCH ACTIVITY ── */
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.match-col{display:grid;gap:6px}
+.match-item{padding:9px 12px;border-radius:9px;border:1.5px solid var(--line);background:#fafbfc;font-size:.82rem;cursor:pointer;transition:all .15s;text-align:center}
+.match-item:hover{border-color:var(--blue);background:var(--blue-l)}
+.match-item.selected{border-color:var(--blue);background:var(--blue-l);color:var(--blue);font-weight:700}
+.match-item.matched{background:var(--green-l);border-color:#7cc090;color:var(--green);cursor:default}
+.match-item.wrong-flash{background:var(--red-l);border-color:#f4b8b8;animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ── FILL BLANK ── */
+.fill-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.87rem;padding:10px 12px;background:#f7f9fc;border-radius:9px;border:1px solid var(--line)}
+.fill-input{border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);font-weight:700;font-size:.87rem;font-family:inherit;outline:none;min-width:80px;text-align:center;padding:0 4px}
+.fill-bank{display:flex;flex-wrap:wrap;gap:6px}
+.fill-pill{padding:6px 12px;border-radius:99px;background:var(--blue-l);border:1.5px solid var(--blue-m);color:var(--blue);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s}
+.fill-pill:hover{background:var(--blue);color:#fff}
+.fill-pill.used{opacity:.35;pointer-events:none}
+
+/* ── REORDER / TILES ── */
+.tile-zone{min-height:44px;padding:8px;border:2px dashed var(--line);border-radius:9px;display:flex;flex-wrap:wrap;gap:6px;transition:border-color .2s;background:#fafbfc}
+.tile-zone.dragover{border-color:var(--blue);background:var(--blue-l)}
+.tile{padding:7px 12px;border-radius:8px;background:var(--blue-l);border:1.5px solid var(--blue-m);color:var(--blue);font-weight:700;font-size:.8rem;cursor:grab;user-select:none;transition:all .15s}
+.tile:active{cursor:grabbing;transform:scale(.97)}
+.tile.placed{background:var(--card);border-color:var(--line);color:var(--ink2)}
+
+/* ── HANGMAN ── */
+.hm-wrap{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.hm-svg{width:110px;height:110px}
+.hm-word{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.hm-letter{width:28px;height:36px;border-bottom:2.5px solid var(--ink);display:grid;place-items:center;font-size:1.1rem;font-weight:800;color:var(--blue)}
+.hm-keys{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.hm-key{width:30px;height:30px;border-radius:6px;border:1.5px solid var(--line);background:#f7f9fc;font-size:.78rem;font-weight:700;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.hm-key:hover:not(:disabled){background:var(--blue-l);border-color:var(--blue);color:var(--blue)}
+.hm-key.hit{background:var(--green-l);border-color:#7cc090;color:var(--green);cursor:default}
+.hm-key.miss{background:#f0f0f0;color:#bbb;cursor:default}
+.hm-clue{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:4px}
+
+/* ── MEMORY GAME ── */
+.mem-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mem-card{aspect-ratio:1;border-radius:10px;border:2px solid var(--line);background:linear-gradient(135deg,var(--blue),var(--teal));cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .35s}
+.mem-card.flipped,.mem-card.matched{transform:rotateY(180deg)}
+.mem-card-front,.mem-card-back{position:absolute;inset:0;border-radius:8px;display:grid;place-items:center;backface-visibility:hidden;font-size:.82rem;font-weight:700;padding:6px;text-align:center}
+.mem-card-front{color:rgba(255,255,255,.4);font-size:1.4rem}
+.mem-card-back{background:#fff;color:var(--blue);transform:rotateY(180deg)}
+.mem-card.matched .mem-card-back{background:var(--green-l);color:var(--green)}
+
+/* ── AUDIO PLAYER ── */
+.audio-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:9px;background:var(--amber-l);border:1.5px solid #ffd480;color:var(--amber);font-weight:700;font-size:.8rem;cursor:pointer;transition:all .15s}
+.audio-btn:hover{background:#ffe8a0}
+.audio-wave{display:flex;align-items:center;gap:2px;height:16px}
+.audio-wave span{width:3px;background:var(--amber);border-radius:99px;animation:wave 1s ease-in-out infinite}
+.audio-wave span:nth-child(1){height:6px;animation-delay:0s}
+.audio-wave span:nth-child(2){height:12px;animation-delay:.1s}
+.audio-wave span:nth-child(3){height:16px;animation-delay:.2s}
+.audio-wave span:nth-child(4){height:10px;animation-delay:.3s}
+.audio-wave span:nth-child(5){height:6px;animation-delay:.4s}
+@keyframes wave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.5)}}
+.audio-btn.playing .audio-wave span{animation-play-state:running}
+.audio-btn:not(.playing) .audio-wave span{animation-play-state:paused;height:4px}
+
+/* ── GRAMMAR BOX ── */
+.gram-box{background:#fff;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.gram-box-head{background:linear-gradient(90deg,var(--green-l),#f8fdf8);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.gram-box-head h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--green)}
+.gram-use{font-size:.75rem;color:#4a7c59;background:#d3f9d8;border-radius:5px;padding:2px 8px;font-weight:700}
+.gram-body{padding:12px 14px;display:grid;gap:8px}
+.gram-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.gram-table th{background:var(--green-l);color:var(--green);padding:6px 10px;text-align:left;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.gram-table td{padding:7px 10px;border-bottom:1px solid #f0f4f0;vertical-align:top}
+.gram-table tr:last-child td{border:none}
+.gram-table .t{color:var(--blue);font-weight:700}
+.gram-err{background:var(--red-l);border-radius:8px;padding:8px 12px;font-size:.8rem}
+.gram-err .x{color:var(--red);text-decoration:line-through}
+.gram-err .ok{color:var(--green);font-weight:700}
+
+/* ── VOCAB CARD ── */
+.vc{background:#fff;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.vc-head{background:linear-gradient(90deg,#1c3a5e,#0c8599);padding:8px 12px}
+.vc-word{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#fff}
+.vc-ipa{font-size:.75rem;color:rgba(255,255,255,.6);font-style:italic}
+.vc-body{padding:10px 12px;display:grid;gap:5px;font-size:.8rem}
+.vc-def{color:var(--ink2)}
+.vc-es{color:var(--muted);font-style:italic}
+.vc-ex{border-left:3px solid var(--amber);padding-left:8px;color:var(--ink2);font-style:italic}
+.vc-tag{display:inline-block;background:var(--blue-l);color:var(--blue);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:5px}
+
+/* ── WRITING TASK ── */
+.write-task{background:#fafbfe;border:1.5px solid var(--line);border-radius:10px;padding:12px}
+.write-context{background:var(--amber-l);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.8rem;color:#6b4c00;margin-bottom:10px}
+.write-context strong{display:block;color:var(--amber);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+textarea.write-area{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px;font-family:inherit;font-size:.85rem;line-height:1.6;resize:none;background:#fff;color:var(--ink);transition:border .15s;min-height:110px}
+textarea.write-area:focus{outline:none;border-color:var(--blue)}
+.word-counter{font-size:.72rem;color:var(--muted);text-align:right;margin-top:4px}
+details.suggested{margin-top:8px;border:1px dashed var(--line);border-radius:9px;padding:8px 12px;background:#fafcfe}
+details.suggested summary{cursor:pointer;font-size:.78rem;font-weight:700;color:var(--amber)}
+details.suggested .sug-body{padding-top:8px;font-size:.82rem;line-height:1.7;color:var(--ink2)}
+
+/* ── FEEDBACK ── */
+.fb{padding:8px 12px;border-radius:9px;font-size:.82rem;font-weight:600;display:none;align-items:center;gap:7px}
+.fb.ok{background:var(--green-l);border:1px solid #7cc090;color:#2a7a40;display:flex}
+.fb.err{background:var(--red-l);border:1px solid #f4b8b8;color:var(--red);display:flex}
+.fb.hint{background:var(--amber-l);border:1px solid #ffd480;color:#7a5500;display:flex}
+
+/* ── BUTTONS ── */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:none;border-radius:9px;padding:8px 14px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:#3050c0}
+.btn.green{background:var(--green);color:#fff}
+.btn.green:hover{background:#27883b}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn.amber{background:var(--amber);color:#fff}
+.btn.sm{padding:5px 10px;font-size:.75rem}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.controls{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--line);margin-top:4px}
+
+/* ── SCORE / BADGE ── */
+.score-box{background:linear-gradient(135deg,var(--blue-l),var(--teal-l));border:1px solid var(--blue-m);border-radius:10px;padding:12px;text-align:center}
+.score-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)}
+.score-label{font-size:.75rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;font-size:.78rem;font-weight:700;border:1.5px dashed var(--line);color:var(--muted);transition:all .3s}
+.badge.earned{background:var(--amber-l);border-color:var(--amber);color:var(--amber);animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── WRAP UP SECTION ── */
+.section-break{display:flex;align-items:center;gap:10px;margin:18px 0 12px}
+.section-break h2{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--green);white-space:nowrap}
+.section-break hr{flex:1;border:none;border-top:2px solid var(--green-l)}
+
+/* ── QUIZ ── */
+.quiz-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:12px}
+.quiz-q{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+.quiz-progress{font-size:.72rem;color:var(--muted);margin-bottom:14px}
+
+/* ── TRANSCRIPT ── */
+.transcript{background:#f7f9fc;border:1.5px dashed var(--line);border-radius:10px;padding:12px;font-size:.83rem;line-height:1.9}
+.t-speaker{font-weight:800;color:var(--blue)}
+.t-target{color:var(--amber);font-weight:700;background:var(--amber-l);padding:0 3px;border-radius:3px}
+
+/* ── VOCAB GRID ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.vg-item{background:#f7f9fc;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:.8rem}
+.vg-item strong{color:var(--blue);display:block;font-weight:700}
+.vg-item span{color:var(--muted);font-style:italic}
+
+/* CANDO CHECK */
+.cando-list{list-style:none;display:grid;gap:7px}
+.cando-item{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:9px;border:1.5px solid var(--line);background:#fafbfd;font-size:.84rem;cursor:pointer;transition:all .15s}
+.cando-item input{accent-color:var(--teal);width:16px;height:16px;flex-shrink:0}
+.cando-item.checked{background:var(--green-l);border-color:#7cc090}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .cols2,.match-wrap,.hm-wrap,.vocab-grid{grid-template-columns:1fr}
+  .cols3{grid-template-columns:1fr 1fr}
+  .mem-board{grid-template-columns:repeat(4,1fr)}
+  .hero{grid-template-columns:1fr}.hero-img{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════ TOPBAR ════════════════════════ -->
+<div class="topbar">
+  <div class="logo-box">HKO</div>
+  <div>
+    <div class="lesson-id">A2 · Lesson [LESSON_NUM] <span>· [LESSON_TITLE]</span></div>
+  </div>
+  <div class="topbar-right">
+    <div class="xp-badge">⚡ <span id="xp">0</span> XP</div>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+      <span id="prog-txt">0%</span>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+<!-- ════════════════════════ HERO ════════════════════════ -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">A2 · HR English · [GRAMMAR_FOCUS]</div>
+    <h1>"[LESSON_TITLE]"</h1>
+    <p>Learn to use [GRAMMAR_FOCUS] in real HR situations.</p>
+    <div class="hero-stats">
+      <div class="hstat"><strong>14</strong><span>Stages</span></div>
+      <div class="hstat"><strong>500</strong><span>XP</span></div>
+      <div class="hstat"><strong>~4h</strong><span>Total</span></div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="[HERO_IMAGE_URL]" alt="Lesson hero image" onerror="this.parentElement.innerHTML='<div class=\'ph\'><div class=\'ico\'>📸</div><small>Image loading</small></div>'">
+  </div>
+</div>
+
+<!-- ════════════════════════ CAN DO ════════════════════════ -->
+<div class="cando">
+  <div class="cando-icon">🎯</div>
+  <div>
+    <div style="font-family:'Syne',sans-serif;font-size:.82rem;font-weight:800;color:var(--blue);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">By the end of this lesson you can…</div>
+    <ul style="list-style:none;display:grid;gap:4px">
+      <li style="font-size:.83rem;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:800">→</span> [CAN_DO_1]</li>
+      <li style="font-size:.83rem;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:800">→</span> [CAN_DO_2]</li>
+      <li style="font-size:.83rem;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:800">→</span> [CAN_DO_3]</li>
+      <li style="font-size:.83rem;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:800">→</span> [CAN_DO_4]</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════════════════ STAGE NAV ════════════════════════ -->
+<div class="stage-nav">
+  <div class="snav-label">Lesson Stages</div>
+  <div class="stage-nav-row">
+    <button class="snav-btn v active" id="nav-v1" onclick="jumpTo('v1')">👁 V1</button>
+    <button class="snav-btn v" id="nav-v2" onclick="jumpTo('v2')">🔤 V2</button>
+    <button class="snav-btn v" id="nav-v3" onclick="jumpTo('v3')">🎙 V3</button>
+    <button class="snav-btn v" id="nav-v4" onclick="jumpTo('v4')">🎮 V4</button>
+    <button class="snav-btn v" id="nav-v5" onclick="jumpTo('v5')">🧩 V5</button>
+    <button class="snav-btn v" id="nav-v6" onclick="jumpTo('v6')">✏️ V6</button>
+    <button class="snav-btn v" id="nav-v7" onclick="jumpTo('v7')">🎤 V7</button>
+    <button class="snav-btn g" id="nav-g1" onclick="jumpTo('g1')">🔍 G1</button>
+    <button class="snav-btn g" id="nav-g2" onclick="jumpTo('g2')">📖 G2</button>
+    <button class="snav-btn g" id="nav-g3" onclick="jumpTo('g3')">🔀 G3</button>
+    <button class="snav-btn g" id="nav-g4" onclick="jumpTo('g4')">✅ G4</button>
+    <button class="snav-btn g" id="nav-g5" onclick="jumpTo('g5')">🛠 G5</button>
+    <button class="snav-btn g" id="nav-g6" onclick="jumpTo('g6')">📝 G6</button>
+    <button class="snav-btn g" id="nav-g7" onclick="jumpTo('g7')">📧 G7</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     V O C A B U L A R Y   P A T H   (Stages V1 – V7)
+══════════════════════════════════════════════════════════ -->
+
+<!-- ── V1 · SCENE ENTRY · Look & Discover ── -->
+<div class="stage" id="v1">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">👁 Word Builder · Stage 1</span>
+    <span class="stage-title">Look at the Scene</span>
+  </div>
+  <div class="stage-body">
+    <div class="cols2">
+      <div class="img-block">
+        <img src="[SCENE_IMAGE]" alt="HR scene" onerror="this.parentElement.innerHTML='<div class=\'ph\'><div class=\'ico\'>📸</div><small>Image loading</small></div>'">
+        <div class="img-caption">An HR team at work in a modern office.</div>
+      </div>
+      <div style="display:grid;gap:8px">
+        <div class="instr-box">
+          <div class="instr">Look at the image carefully. Answer the questions below.</div>
+          <div class="es">Mira la imagen. Responde las preguntas.</div>
+        </div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--ink2)">What can you see? Choose <em>all</em> that apply.</div>
+        <div class="choices" id="v1-obs">
+          <div class="choice" onclick="toggleObs(this,'correct')"><div class="mark"></div>People reviewing documents together</div>
+          <div class="choice" onclick="toggleObs(this,'correct')"><div class="mark"></div>A professional office environment</div>
+          <div class="choice" onclick="toggleObs(this,'wrong')"><div class="mark"></div>Someone working alone at home</div>
+          <div class="choice" onclick="toggleObs(this,'correct')"><div class="mark"></div>Colleagues having a discussion</div>
+        </div>
+        <button class="btn ghost sm" onclick="checkV1()">Check Answers</button>
+      </div>
+    </div>
+    <div style="font-size:.82rem;font-weight:700;color:var(--ink2);margin-top:2px">What is probably happening? Choose one.</div>
+    <div class="choices" id="v1-pred">
+      <div class="choice" onclick="pickOne(this,'v1-pred','correct')"><div class="mark"></div>The team is discussing a job application</div>
+      <div class="choice" onclick="pickOne(this,'v1-pred','wrong')"><div class="mark"></div>The team is having a social lunch</div>
+      <div class="choice" onclick="pickOne(this,'v1-pred','wrong')"><div class="mark"></div>Someone is being fired</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkV1Pred()">Check Prediction</button>
+    <div id="v1-fb" class="fb"></div>
+    <div class="controls">
+      <span></span>
+      <div class="btn-row">
+        <button class="btn ghost sm" onclick="resetStage('v1')">↩ Reset</button>
+        <button class="btn primary" onclick="completeStage('v1','v2')">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── V2 · WORD MATCH · Recognition Games ── -->
+<div class="stage" id="v2">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">🔤 Word Builder · Stage 2</span>
+    <span class="stage-title">Meet the Words</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Match each career action to its meaning. Click a word, then its match.</div>
+      <div class="es">Une cada acción de carrera con su significado.</div>
+    </div>
+    <div class="match-wrap" id="v2-match">
+      <div class="match-col" id="v2-words">
+        <div class="match-item" data-pair="a" onclick="matchClick(this)">started</div>
+        <div class="match-item" data-pair="b" onclick="matchClick(this)">graduated</div>
+        <div class="match-item" data-pair="c" onclick="matchClick(this)">applied</div>
+        <div class="match-item" data-pair="d" onclick="matchClick(this)">received</div>
+        <div class="match-item" data-pair="e" onclick="matchClick(this)">changed</div>
+        <div class="match-item" data-pair="f" onclick="matchClick(this)">joined</div>
+      </div>
+      <div class="match-col" id="v2-defs">
+        <div class="match-item" data-pair="c" onclick="matchClick(this)">formally requested a job</div>
+        <div class="match-item" data-pair="e" onclick="matchClick(this)">moved to something different</div>
+        <div class="match-item" data-pair="a" onclick="matchClick(this)">began a role or position</div>
+        <div class="match-item" data-pair="f" onclick="matchClick(this)">became part of a team</div>
+        <div class="match-item" data-pair="d" onclick="matchClick(this)">got something back</div>
+        <div class="match-item" data-pair="b" onclick="matchClick(this)">finished university studies</div>
+      </div>
+    </div>
+    <button class="btn ghost sm" onclick="checkMatch()">Check Match</button>
+    <div id="v2-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v1')">← Back</button>
+      <div class="btn-row">
+        <button class="btn ghost sm" onclick="resetMatch()">↩ Reset</button>
+        <button class="btn primary" onclick="completeStage('v2','v3')">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── V3 · AUDIO · Story ── -->
+<div class="stage" id="v3">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">🎙 Word Builder · Stage 3</span>
+    <span class="stage-title">Listen to the Story</span>
+  </div>
+  <div class="stage-body">
+    <div class="cols2">
+      <div class="img-block">
+        <img src="[SCENE_IMAGE]" alt="Story scene">
+      </div>
+      <div style="display:grid;gap:8px;align-content:start">
+        <div class="instr-box">
+          <div class="instr">Listen to the story. Notice the highlighted words.</div>
+          <div class="es">Escucha la historia. Nota las palabras destacadas.</div>
+        </div>
+        <div class="audio-btn" onclick="playStory(this)" id="story-btn">
+          <span>🔊</span>
+          <span id="story-txt">Play Story</span>
+          <div class="audio-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="transcript" id="v3-transcript" style="display:none">
+          [STORY_SCRIPT]
+        </div>
+        <button class="btn ghost sm" onclick="document.getElementById('v3-transcript').style.display=document.getElementById('v3-transcript').style.display==='none'?'block':'none'">📄 Show/Hide Script</button>
+      </div>
+    </div>
+    <div style="font-size:.82rem;font-weight:700;color:var(--ink2)">Answer the questions. Choose the best option.</div>
+    <div style="display:grid;gap:10px" id="v3-qs">
+      <div>
+        <div style="font-size:.82rem;color:var(--ink2);margin-bottom:5px;font-weight:600">1. When did the person graduate?</div>
+        <div class="choices">
+          <div class="choice" onclick="quizQ(this,0,'b')"><div class="mark"></div>2016</div>
+          <div class="choice" onclick="quizQ(this,0,'a')"><div class="mark"></div>2018</div>
+          <div class="choice" onclick="quizQ(this,0,'b')"><div class="mark"></div>2020</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;color:var(--ink2);margin-bottom:5px;font-weight:600">2. What was the first role?</div>
+        <div class="choices">
+          <div class="choice" onclick="quizQ(this,1,'b')"><div class="mark"></div>HR Coordinator</div>
+          <div class="choice" onclick="quizQ(this,1,'a')"><div class="mark"></div>HR Assistant</div>
+          <div class="choice" onclick="quizQ(this,1,'b')"><div class="mark"></div>Recruiter</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;color:var(--ink2);margin-bottom:5px;font-weight:600">3. Which word means "formally requested a job"?</div>
+        <div class="choices">
+          <div class="choice" onclick="quizQ(this,2,'b')"><div class="mark"></div>started</div>
+          <div class="choice" onclick="quizQ(this,2,'b')"><div class="mark"></div>received</div>
+          <div class="choice" onclick="quizQ(this,2,'a')"><div class="mark"></div>applied</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn ghost sm" onclick="checkV3()">Check Answers</button>
+    <div id="v3-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v2')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v3','v4')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── V4 · HANGMAN ── -->
+<div class="stage" id="v4">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">🎮 Word Builder · Stage 4</span>
+    <span class="stage-title">Career Word Challenge</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Guess the career word. You have 6 attempts!</div>
+      <div class="es">Adivina la palabra. ¡Tienes 6 intentos!</div>
+    </div>
+    <div class="hm-wrap">
+      <div>
+        <svg class="hm-svg" viewBox="0 0 110 110" id="hm-svg">
+          <line x1="10" y1="105" x2="100" y2="105" stroke="#3d4f5c" stroke-width="3" stroke-linecap="round"/>
+          <line x1="30" y1="105" x2="30" y2="10" stroke="#3d4f5c" stroke-width="3" stroke-linecap="round"/>
+          <line x1="30" y1="10" x2="70" y2="10" stroke="#3d4f5c" stroke-width="3" stroke-linecap="round"/>
+          <line x1="70" y1="10" x2="70" y2="25" stroke="#3d4f5c" stroke-width="3" stroke-linecap="round"/>
+          <circle id="hm-head" cx="70" cy="33" r="8" stroke="#e03131" stroke-width="2.5" fill="none" opacity="0"/>
+          <line id="hm-body" x1="70" y1="41" x2="70" y2="68" stroke="#e03131" stroke-width="2.5" opacity="0"/>
+          <line id="hm-la" x1="70" y1="50" x2="55" y2="62" stroke="#e03131" stroke-width="2.5" opacity="0"/>
+          <line id="hm-ra" x1="70" y1="50" x2="85" y2="62" stroke="#e03131" stroke-width="2.5" opacity="0"/>
+          <line id="hm-ll" x1="70" y1="68" x2="55" y2="85" stroke="#e03131" stroke-width="2.5" opacity="0"/>
+          <line id="hm-rl" x1="70" y1="68" x2="85" y2="85" stroke="#e03131" stroke-width="2.5" opacity="0"/>
+        </svg>
+        <div id="hm-status" style="font-size:.75rem;font-weight:700;color:var(--muted);text-align:center">Remaining: <span id="hm-left">6</span></div>
+      </div>
+      <div>
+        <div id="hm-clue" class="hm-clue">Clue: Past tense of "to begin a job"</div>
+        <div class="hm-word" id="hm-word" style="margin:10px 0"></div>
+        <div class="hm-keys" id="hm-keys"></div>
+        <div id="hm-fb" class="fb" style="margin-top:8px"></div>
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn ghost sm" onclick="initHangman()">↩ New Word</button>
+          <button class="btn ghost sm" onclick="checkHangman()">Check Word</button>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v3')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v4','v5')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── V5 · MEMORY GAME + SORT ── -->
+<div class="stage" id="v5">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">🧩 Word Builder · Stage 5</span>
+    <span class="stage-title">Memory & Sort</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Flip cards to find matching pairs: English word ↔ Spanish meaning.</div>
+      <div class="es">Voltea fichas para encontrar los pares correctos.</div>
+    </div>
+    <div class="mem-board" id="mem-board"></div>
+    <div style="display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:4px">
+      <span>Pairs: <strong id="mem-pairs">0</strong>/4</span>
+      <button class="btn ghost sm" onclick="checkMemory()">Check Progress</button>
+      <button class="btn ghost sm" onclick="initMemory()">↩ Reset</button>
+    </div>
+    <div id="v5-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v4')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v5','v6')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── V6 · CONTROLLED WRITING ── -->
+<div class="stage" id="v6">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">✏️ Word Builder · Stage 6</span>
+    <span class="stage-title">Spot the Error</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Choose the correct sentence in each pair.</div>
+      <div class="es">Elige la oración correcta en cada par.</div>
+    </div>
+    <div class="choices" id="v6-err">
+      <div class="choice" onclick="pickOne(this,'v6-err','wrong')"><div class="mark"></div>She didn't <u>worked</u> in finance.</div>
+      <div class="choice" onclick="pickOne(this,'v6-err','correct')"><div class="mark"></div>She didn't <strong>work</strong> in finance.</div>
+    </div>
+    <div class="choices" id="v6-err2" style="margin-top:8px">
+      <div class="choice" onclick="pickOne(this,'v6-err2','wrong')"><div class="mark"></div>Did she worked at MineSafe?</div>
+      <div class="choice" onclick="pickOne(this,'v6-err2','correct')"><div class="mark"></div>Did she <strong>work</strong> at MineSafe?</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkV6()">Check Answers</button>
+    <div id="v6-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v5')">← Back</button>
+      <button class="btn primary" onclick="completeStage('v6','v7')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── V7 · SPEAKING PRODUCTION ── -->
+<div class="stage" id="v7">
+  <div class="stage-head">
+    <span class="stage-badge badge-v">🎤 Word Builder · Stage 7</span>
+    <span class="stage-title">Tell Your Story</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Record yourself (30–60 seconds). Use at least 5 words from this lesson.</div>
+      <div class="es">Grábate 30–60 segundos. Usa al menos 5 palabras de esta lección.</div>
+    </div>
+    <div class="write-context">
+      <strong>Prompt</strong>
+      Tell us about your career: When did you start? What did you do? Where did you work?
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+      <button class="btn amber" onclick="alert('🎙 Recording — connect to Moodle audio capture')">🔴 Record</button>
+      <button class="btn ghost sm" onclick="alert('⏹ Stop')">⏹ Stop</button>
+      <button class="btn ghost sm" onclick="alert('▶ Play back')">▶ Play</button>
+    </div>
+    <details class="suggested">
+      <summary>💡 Sample Answer</summary>
+      <div class="sug-body">"I started my career in HR five years ago. I graduated from university in 2019 and applied for several jobs. I received an offer from a recruitment agency and worked there for three years. Then I changed roles and joined the talent management team."</div>
+    </details>
+    <div class="badge-row" style="margin-top:8px">
+      <div class="badge" id="badge-vocab">🗂 Vocabulary Complete</div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v6')">← Back</button>
+      <button class="btn green" onclick="unlockBadge('badge-vocab');completeStage('v7','g1')">✅ Start Useful Language →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     U S E F U L   L A N G U A G E   (Stages G1 – G7)
+══════════════════════════════════════════════════════════ -->
+
+<div class="section-break">
+  <h2>Useful Language</h2>
+  <hr>
+</div>
+
+<!-- ── G1 · NOTICE THE PATTERN ── -->
+<div class="stage" id="g1">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">🔍 Useful Language · Stage 1</span>
+    <span class="stage-title">How Did She Say It?</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Read the sentences. What do you notice about the verbs?</div>
+      <div class="es">¿Qué notas sobre los verbos?</div>
+    </div>
+    <div style="padding:9px 13px;background:var(--blue-l);border-left:3px solid var(--blue);font-size:.88rem">I <strong style="color:var(--blue)">started</strong> five years ago.</div>
+    <div style="padding:9px 13px;background:var(--blue-l);border-left:3px solid var(--blue);font-size:.88rem">She <strong style="color:var(--blue)">graduated</strong> in 2018.</div>
+    <div class="choices" id="g1-disc">
+      <div class="choice" onclick="pickOne(this,'g1-disc','correct')"><div class="mark"></div>They describe finished actions in the past</div>
+      <div class="choice" onclick="pickOne(this,'g1-disc','wrong')"><div class="mark"></div>They describe things happening right now</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkG1()">Check Answer</button>
+    <div id="g1-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('v7')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g1','g2')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G2 · GRAMMAR BOX ── -->
+<div class="stage" id="g2">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">📖 Useful Language · Stage 2</span>
+    <span class="stage-title">The Language Box</span>
+  </div>
+  <div class="stage-body">
+    <div class="gram-box">
+      <div class="gram-box-head">
+        <h4>[GRAMMAR_FOCUS]</h4>
+        <span class="gram-use">We use this to describe finished career actions</span>
+      </div>
+      <div class="gram-body">
+        <table class="gram-table">
+          <thead><tr><th>Form</th><th>Structure</th><th>HR Example</th></tr></thead>
+          <tbody>
+            <tr><td>✅ +</td><td>subject + <span class="t">verb+ed</span></td><td>I <span class="t">started</span> in HR five years ago.</td></tr>
+            <tr><td>❌ −</td><td>subject + <span class="t">didn't</span> + base verb</td><td>She <span class="t">didn't work</span> in payroll.</td></tr>
+            <tr><td>❓ ?</td><td><span class="t">Did</span> + subject + base verb?</td><td><span class="t">Did</span> you work there long?</td></tr>
+          </tbody>
+        </table>
+        <div class="gram-err">
+          <div style="font-size:.72rem;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">⚠ Common Mistake</div>
+          <div><span class="x">She didn't worked.</span> → <span class="ok">She didn't work.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g1')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g2','g3')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G3 · COMPARE & SORT ── -->
+<div class="stage" id="g3">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">🔀 Useful Language · Stage 3</span>
+    <span class="stage-title">Correct or Not?</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Which sentence uses the correct form?</div>
+      <div class="es">¿Cuál oración usa la forma correcta?</div>
+    </div>
+    <div class="choices" id="g3-q">
+      <div class="choice" onclick="pickOne(this,'g3-q','wrong')"><div class="mark"></div>I am working last week.</div>
+      <div class="choice" onclick="pickOne(this,'g3-q','correct')"><div class="mark"></div>I worked last week.</div>
+      <div class="choice" onclick="pickOne(this,'g3-q','wrong')"><div class="mark"></div>I work last week.</div>
+    </div>
+    <div class="choices" id="g3-q2" style="margin-top:8px">
+      <div class="choice" onclick="pickOne(this,'g3-q2','wrong')"><div class="mark"></div>We didn't received any CVs.</div>
+      <div class="choice" onclick="pickOne(this,'g3-q2','correct')"><div class="mark"></div>We didn't receive any CVs.</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkG3()">Check Answers</button>
+    <div id="g3-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g2')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g3','g4')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G4 · CONTROLLED FORMATION ── -->
+<div class="stage" id="g4">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">✅ Useful Language · Stage 4</span>
+    <span class="stage-title">Build the Forms</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Complete each sentence with the correct form.</div>
+      <div class="es">Completa con la forma correcta.</div>
+    </div>
+    <div class="fill-row">I <input class="fill-input" id="g4f1" placeholder="?" style="width:85px"> for five positions last year.
+      <div class="fill-bank"><span class="fill-pill" onclick="fillInput('g4f1',this,'applied')">applied</span><span class="fill-pill" onclick="fillInput('g4f1',this,'apply')">apply</span></div>
+    </div>
+    <div class="fill-row">She <input class="fill-input" id="g4f2" placeholder="?" style="width:75px"> complete the form.
+      <div class="fill-bank"><span class="fill-pill" onclick="fillInput('g4f2',this,"didn't")">didn't</span><span class="fill-pill" onclick="fillInput('g4f2',this,'not')">not</span></div>
+    </div>
+    <div class="fill-row"><input class="fill-input" id="g4f3" placeholder="?" style="width:40px"> you work in mining before?
+      <div class="fill-bank"><span class="fill-pill" onclick="fillInput('g4f3',this,'Did')">Did</span><span class="fill-pill" onclick="fillInput('g4f3',this,'Do')">Do</span></div>
+    </div>
+    <button class="btn ghost sm" onclick="checkG4()">Check All</button>
+    <div id="g4-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g3')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g4','g5')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G5 · INTERVIEW LISTENING ── -->
+<div class="stage" id="g5">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">🛠 Useful Language · Stage 5</span>
+    <span class="stage-title">Listening Practice</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Listen to the interview. Focus on how questions are formed.</div>
+      <div class="es">Escucha la entrevista. Observa cómo se forman las preguntas.</div>
+    </div>
+    <div class="cols2">
+      <div class="img-block">
+        <img src="[GRAMMAR_IMAGE]" alt="Grammar scene">
+      </div>
+      <div style="display:grid;gap:7px;align-content:start">
+        <div class="audio-btn" onclick="playDialogue(this)">
+          <span>🔊</span><span>Play Dialogue</span>
+          <div class="audio-wave"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="transcript">
+          <p><span class="t-speaker">Interviewer:</span> <span class="t-target">When did</span> you graduate?</p>
+          <p><span class="t-speaker">Candidate:</span> I graduated in 2018.</p>
+          <p><span class="t-speaker">Interviewer:</span> <span class="t-target">Where did</span> you work after that?</p>
+          <p><span class="t-speaker">Candidate:</span> I worked at MineSafe for 4 years.</p>
+          <p><span class="t-speaker">Interviewer:</span> <span class="t-target">Did</span> you manage a team?</p>
+          <p><span class="t-speaker">Candidate:</span> No, I <span class="t-target">didn't</span>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="choices" id="g5-disc">
+      <div class="choice" onclick="pickOne(this,'g5-disc','correct')"><div class="mark"></div>Questions use Did + subject + base verb</div>
+      <div class="choice" onclick="pickOne(this,'g5-disc','wrong')"><div class="mark"></div>Questions use Does + subject + -ed verb</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkG5()">Check Answer</button>
+    <div id="g5-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g4')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g5','g6')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G6 · GUIDED PRODUCTION · Sentence building ── -->
+<div class="stage" id="g6">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">📝 Useful Language · Stage 6</span>
+    <span class="stage-title">Build Interview Questions</span>
+  </div>
+  <div class="stage-body">
+    <div class="instr-box">
+      <div class="instr">Choose the correct sentence in each pair.</div>
+      <div class="es">Elige la oración correcta en cada par.</div>
+    </div>
+    <div class="choices" id="g6-q">
+      <div class="choice" onclick="pickOne(this,'g6-q','wrong')"><div class="mark"></div>Did she worked at MineSafe?</div>
+      <div class="choice" onclick="pickOne(this,'g6-q','correct')"><div class="mark"></div>Did she work at MineSafe?</div>
+    </div>
+    <div class="choices" id="g6-q2" style="margin-top:8px">
+      <div class="choice" onclick="pickOne(this,'g6-q2','correct')"><div class="mark"></div>How long did you work there?</div>
+      <div class="choice" onclick="pickOne(this,'g6-q2','wrong')"><div class="mark"></div>How long did you worked there?</div>
+    </div>
+    <button class="btn ghost sm" onclick="checkG6()">Check Answers</button>
+    <div id="g6-fb" class="fb"></div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g5')">← Back</button>
+      <button class="btn primary" onclick="completeStage('g6','g7')">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── G7 · FREE WRITING · Professional email ── -->
+<div class="stage" id="g7">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">📧 Useful Language · Stage 7</span>
+    <span class="stage-title">Write a Professional Message</span>
+  </div>
+  <div class="stage-body">
+    <div class="write-task">
+      <div class="write-context">
+        <strong>Your Task</strong>
+        Write a short email to your manager about a recent recruitment process. Use past simple throughout. Aim for 60–100 words.
+      </div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:5px">Word bank:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+        <span class="fill-pill" style="cursor:default">received</span>
+        <span class="fill-pill" style="cursor:default">reviewed</span>
+        <span class="fill-pill" style="cursor:default">shortlisted</span>
+        <span class="fill-pill" style="cursor:default">interviewed</span>
+        <span class="fill-pill" style="cursor:default">went well</span>
+        <span class="fill-pill" style="cursor:default">didn't expect</span>
+      </div>
+      <textarea class="write-area" id="g7-text" placeholder="Hi María,&#10;&#10;I wanted to update you on the recruitment process…&#10;&#10;Best regards,&#10;[Your name]" oninput="updateCounter(this,'g7-wc')"></textarea>
+      <div class="word-counter">Words: <span id="g7-wc">0</span> / 60–100</div>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn ghost sm" onclick="checkWriteLen('g7-text','g7-fb',60)">Check Length</button>
+      </div>
+      <div id="g7-fb" class="fb"></div>
+      <details class="suggested">
+        <summary>💡 Suggested Answer</summary>
+        <div class="sug-body">Hi María,<br><br>I wanted to update you on the recruitment process for the HR Coordinator role.<br><br>We received 45 applications last week. I didn't expect so many! I reviewed them carefully and shortlisted six candidates. The interviews went very well — three candidates performed really strongly.<br><br>I'll send you the final recommendation today.<br><br>Best regards, Paula</div>
+      </details>
+    </div>
+    <div class="badge-row" style="margin-top:10px">
+      <div class="badge" id="badge-gram">📝 Language Complete</div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost sm" onclick="jumpTo('g6')">← Back</button>
+      <button class="btn green" onclick="unlockBadge('badge-gram');completeStage('g7','quiz')">✅ Go to Quiz →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     Q U I Z
+══════════════════════════════════════════════════════════ -->
+
+<div class="section-break" id="quiz">
+  <h2>Lesson Quiz</h2>
+  <hr>
+</div>
+
+<div class="quiz-card">
+  <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--blue);margin-bottom:4px">📋 End-of-Lesson Check · 20 pts</div>
+  <div class="quiz-progress" id="quiz-prog">Question 1 of 5</div>
+  <div id="quiz-score-box" style="display:none"></div>
+
+  <div class="q-item" id="qq1">
+    <div class="quiz-q">1. Which sentence uses past simple correctly?</div>
+    <div class="choices" id="quiz-q1">
+      <div class="choice" onclick="quizPick(this,1,'b')"><div class="mark"></div>She is start in HR last year.</div>
+      <div class="choice" onclick="quizPick(this,1,'a')"><div class="mark"></div>She started in HR last year.</div>
+      <div class="choice" onclick="quizPick(this,1,'b')"><div class="mark"></div>She has started in HR last year.</div>
+    </div>
+  </div>
+  <div class="q-item" id="qq2" style="display:none">
+    <div class="quiz-q">2. Complete: "We _____ any candidates this month." (negative)</div>
+    <div class="choices" id="quiz-q2">
+      <div class="choice" onclick="quizPick(this,2,'b')"><div class="mark"></div>didn't hired</div>
+      <div class="choice" onclick="quizPick(this,2,'a')"><div class="mark"></div>didn't hire</div>
+      <div class="choice" onclick="quizPick(this,2,'b')"><div class="mark"></div>not hired</div>
+    </div>
+  </div>
+  <div class="q-item" id="qq3" style="display:none">
+    <div class="quiz-q">3. "Applied" means…</div>
+    <div class="choices" id="quiz-q3">
+      <div class="choice" onclick="quizPick(this,3,'b')"><div class="mark"></div>started a new job</div>
+      <div class="choice" onclick="quizPick(this,3,'a')"><div class="mark"></div>formally requested a position</div>
+      <div class="choice" onclick="quizPick(this,3,'b')"><div class="mark"></div>graduated from university</div>
+    </div>
+  </div>
+  <div class="q-item" id="qq4" style="display:none">
+    <div class="quiz-q">4. Which question is correct?</div>
+    <div class="choices" id="quiz-q4">
+      <div class="choice" onclick="quizPick(this,4,'b')"><div class="mark"></div>Did she worked there?</div>
+      <div class="choice" onclick="quizPick(this,4,'a')"><div class="mark"></div>Did she work there?</div>
+      <div class="choice" onclick="quizPick(this,4,'b')"><div class="mark"></div>Does she worked there?</div>
+    </div>
+  </div>
+  <div class="q-item" id="qq5" style="display:none">
+    <div class="quiz-q">5. "Joined" means…</div>
+    <div class="choices" id="quiz-q5">
+      <div class="choice" onclick="quizPick(this,5,'b')"><div class="mark"></div>left the company</div>
+      <div class="choice" onclick="quizPick(this,5,'b')"><div class="mark"></div>started university</div>
+      <div class="choice" onclick="quizPick(this,5,'a')"><div class="mark"></div>became part of a team</div>
+    </div>
+  </div>
+  <button class="btn primary" onclick="submitQuiz()" style="margin-top:16px">Submit Quiz</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     W R A P   U P
+══════════════════════════════════════════════════════════ -->
+
+<div class="section-break" id="wrapup">
+  <h2>Lesson Wrap-Up</h2>
+  <hr>
+</div>
+
+<div class="stage" style="box-shadow:none">
+  <div class="stage-head">
+    <span class="stage-badge badge-g">✅ Self Check</span>
+    <span class="stage-title">What Can You Do Now?</span>
+  </div>
+  <div class="stage-body">
+    <ul class="cando-list">
+      <li class="cando-item" onclick="this.querySelector('input').checked=!this.querySelector('input').checked;this.classList.toggle('checked')"><input type="checkbox"> [CAN_DO_1]</li>
+      <li class="cando-item" onclick="this.querySelector('input').checked=!this.querySelector('input').checked;this.classList.toggle('checked')"><input type="checkbox"> [CAN_DO_2]</li>
+      <li class="cando-item" onclick="this.querySelector('input').checked=!this.querySelector('input').checked;this.classList.toggle('checked')"><input type="checkbox"> [CAN_DO_3]</li>
+      <li class="cando-item" onclick="this.querySelector('input').checked=!this.querySelector('input').checked;this.classList.toggle('checked')"><input type="checkbox"> [CAN_DO_4]</li>
+    </ul>
+    <div class="vocab-grid" id="wrapup-vocab">
+      [VOCAB_GRID]
+    </div>
+    <div class="badge-row" style="margin-top:10px">
+      <div class="badge" id="badge-final">🏆 Lesson Complete</div>
+    </div>
+    <div class="btn-row" style="margin-top:8px">
+      <button class="btn green" onclick="finishLesson()">🎉 Finish Lesson</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ============================================================
+   HKO LESSON ENGINE v3.0
+   ============================================================ */
+
+const STAGES = ['v1','v2','v3','v4','v5','v6','v7','g1','g2','g3','g4','g5','g6','g7'];
+const done = new Set();
+let xp = 0;
+let quizCurrent = 1;
+const quizCorrect = {1:'a',2:'a',3:'a',4:'a',5:'a'};
+let quizScore = 0;
+
+// Check Answer Functions
+function checkV1() {
+  const correct = document.querySelectorAll('#v1-obs .choice.correct');
+  if(correct.length >= 3) {
+    showFB('v1-fb','ok','Good observation! You identified the key elements.');
+    addXP(10);
+  } else {
+    showFB('v1-fb','hint','Look at the people, their clothes, and the office setting.');
+  }
+}
+
+function checkV1Pred() {
+  const selected = document.querySelector('#v1-pred .choice.correct');
+  if(selected && selected.classList.contains('correct')) {
+    showFB('v1-fb','ok','Correct! They are discussing work.');
+    addXP(10);
+  } else {
+    showFB('v1-fb','hint','Think about what HR professionals do in an office.');
+  }
+}
+
+function checkMatch() {
+  const matched = document.querySelectorAll('#v2-match .match-item.matched').length;
+  if(matched === 12) {
+    showFB('v2-fb','ok','Perfect! All words matched correctly.');
+    addXP(20);
+  } else {
+    showFB('v2-fb','hint',`${matched}/12 matched. Keep going!`);
+  }
+}
+
+function checkV3() {
+  let correct = 0;
+  const q1 = document.querySelector('#v3-qs .choices:first-child .choice.correct');
+  const q2 = document.querySelector('#v3-qs .choices:nth-child(2) .choice.correct');
+  const q3 = document.querySelector('#v3-qs .choices:nth-child(3) .choice.correct');
+  if(q1) correct++;
+  if(q2) correct++;
+  if(q3) correct++;
+  if(correct === 3) {
+    showFB('v3-fb','ok','All answers correct! Great listening.');
+    addXP(15);
+  } else {
+    showFB('v3-fb','hint',`${correct}/3 correct. Listen again to the story.`);
+  }
+}
+
+function checkHangman() {
+  const currentWord = hmCurrent.word;
+  const guessed = document.querySelectorAll('.hm-letter').map(l => l.textContent).join('');
+  if(guessed === currentWord) {
+    showFB('hm-fb','ok','Correct word! Well done.');
+    addXP(30);
+  } else {
+    showFB('hm-fb','hint',`Try guessing more letters. The word has ${currentWord.length} letters.`);
+  }
+}
+
+function checkMemory() {
+  if(memFound === memPairs.length) {
+    showFB('v5-fb','ok','All pairs found! Excellent memory.');
+    addXP(20);
+  } else {
+    showFB('v5-fb','hint',`${memFound}/${memPairs.length} pairs found. Keep matching!`);
+  }
+}
+
+function checkV6() {
+  let correct = 0;
+  const q1 = document.querySelector('#v6-err .choice.correct');
+  const q2 = document.querySelector('#v6-err2 .choice.correct');
+  if(q1 && q1.classList.contains('correct')) correct++;
+  if(q2 && q2.classList.contains('correct')) correct++;
+  if(correct === 2) {
+    showFB('v6-fb','ok','Perfect! You spotted both errors.');
+    addXP(15);
+  } else {
+    showFB('v6-fb','hint',`${correct}/2 correct. Remember: didn't + base verb.`);
+  }
+}
+
+function checkG1() {
+  const selected = document.querySelector('#g1-disc .choice.correct');
+  if(selected && selected.classList.contains('correct')) {
+    showFB('g1-fb','ok','Correct! These are past simple verbs describing finished actions.');
+    addXP(10);
+  } else {
+    showFB('g1-fb','hint','Look at the -ed endings. These are past tense verbs.');
+  }
+}
+
+function checkG3() {
+  let correct = 0;
+  const q1 = document.querySelector('#g3-q .choice.correct');
+  const q2 = document.querySelector('#g3-q2 .choice.correct');
+  if(q1 && q1.classList.contains('correct')) correct++;
+  if(q2 && q2.classList.contains('correct')) correct++;
+  if(correct === 2) {
+    showFB('g3-fb','ok','Correct! Past simple uses -ed or didn't + base verb.');
+    addXP(15);
+  } else {
+    showFB('g3-fb','hint',`${correct}/2 correct. Check the grammar box again.`);
+  }
+}
+
+function checkG4() {
+  const f1 = document.getElementById('g4f1').value.trim().toLowerCase();
+  const f2 = document.getElementById('g4f2').value.trim().toLowerCase();
+  const f3 = document.getElementById('g4f3').value.trim().toLowerCase();
+  let correct = 0;
+  if(f1 === 'applied') correct++;
+  if(f2 === "didn't") correct++;
+  if(f3 === 'did') correct++;
+  if(correct === 3) {
+    showFB('g4-fb','ok','All correct! Great work.');
+    addXP(20);
+  } else {
+    showFB('g4-fb','hint',`${correct}/3 correct. Try using the word bank.`);
+  }
+}
+
+function checkG5() {
+  const selected = document.querySelector('#g5-disc .choice.correct');
+  if(selected && selected.classList.contains('correct')) {
+    showFB('g5-fb','ok','Correct! Questions use Did + subject + base verb.');
+    addXP(10);
+  } else {
+    showFB('g5-fb','hint','Listen again: Did you work? not Did you worked?');
+  }
+}
+
+function checkG6() {
+  let correct = 0;
+  const q1 = document.querySelector('#g6-q .choice.correct');
+  const q2 = document.querySelector('#g6-q2 .choice.correct');
+  if(q1 && q1.classList.contains('correct')) correct++;
+  if(q2 && q2.classList.contains('correct')) correct++;
+  if(correct === 2) {
+    showFB('g6-fb','ok','Perfect! Both questions are correct.');
+    addXP(15);
+  } else {
+    showFB('g6-fb','hint',`${correct}/2 correct. Remember: Did + subject + base verb.`);
+  }
+}
+
+function submitQuiz() {
+  const pts = quizScore * 4;
+  const sb = document.getElementById('quiz-score-box');
+  sb.style.display = 'block';
+  sb.innerHTML = `<div class="score-box"><div class="score-num">${pts}<span style="font-size:1rem">/20</span></div><div class="score-label">${pts >= 16 ? 'Excellent! 🏆' : (pts >= 12 ? 'Good job!' : 'Review & retry')}</div></div>`;
+  if(pts >= 16) unlockBadge('badge-final');
+  sb.scrollIntoView({behavior:'smooth'});
+}
+
+function finishLesson() {
+  unlockBadge('badge-final');
+  alert('🎉 Lesson Complete! You earned ' + xp + ' XP. Well done!');
+}
+
+// Existing functions (addXP, updateProg, jumpTo, completeStage, etc.)
+function addXP(n){ xp += n; document.getElementById('xp').textContent = xp; }
+function updateProg(){ let p = Math.round(done.size/14*100); document.getElementById('prog').style.width = p+'%'; document.getElementById('prog-txt').textContent = p+'%'; }
+function jumpTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'}); }
+function completeStage(id,next){ if(!done.has(id)){ done.add(id); addXP(25); } updateProg(); document.getElementById('nav-'+id)?.classList.add('done'); if(next) setTimeout(()=>jumpTo(next),300); }
+function showFB(id,type,msg){ let el = document.getElementById(id); if(el){ el.className = 'fb '+type; el.style.display='flex'; el.textContent = msg; } }
+function resetStage(id){ let el = document.getElementById(id); if(el){ el.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','wrong','chosen')); el.querySelectorAll('.fb').forEach(f=>{f.style.display='none';}); } }
+function pickOne(el,groupId,isCorrect){ let group = document.getElementById(groupId); if(!group) return; group.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','wrong','chosen')); el.classList.add(isCorrect==='correct'?'correct':'wrong'); if(isCorrect==='correct') addXP(10); }
+function toggleObs(el,result){ el.classList.toggle('chosen'); if(result==='correct') el.classList.toggle('correct',el.classList.contains('chosen')); else el.classList.toggle('wrong',el.classList.contains('chosen')); }
+function quizQ(el,idx,result){ let parent = el.closest('.choices'); parent.querySelectorAll('.choice').forEach(c=>c.classList.remove('correct','wrong')); el.classList.add(result==='a'?'correct':'wrong'); if(result==='a') addXP(5); }
+function fillInput(id,pill,val){ let inp = document.getElementById(id); if(inp){ inp.value=val; inp.style.color='var(--blue)'; } }
+function unlockBadge(id){ document.getElementById(id)?.classList.add('earned'); }
+function updateCounter(ta,cntId){ let words = ta.value.trim().split(/\s+/).filter(w=>w).length; document.getElementById(cntId).textContent=words; }
+function checkWriteLen(taId,fbId,min){ let ta = document.getElementById(taId); let words = ta.value.trim().split(/\s+/).filter(w=>w).length; if(words>=min){ showFB(fbId,'ok','Good length! Check the suggested answer.'); addXP(25); } else { showFB(fbId,'hint',`Try to write at least ${min} words. You have ${words} so far.`); } }
+function quizPick(el,q,opt){ let parent = el.closest('.choices'); parent.querySelectorAll('.choice').forEach(c=>c.classList.remove('chosen')); el.classList.add('chosen'); setTimeout(()=>{ let correct=quizCorrect[q]===opt; parent.querySelectorAll('.choice').forEach((c,i)=>{ let opts=['a','b','c']; if(quizCorrect[q]===opts[i]) c.classList.add('correct'); else if(c.classList.contains('chosen')&&!correct) c.classList.add('wrong'); }); if(correct){ quizScore++; addXP(20); } setTimeout(()=>{ if(quizCurrent<5){ document.getElementById('qq'+quizCurrent).style.display='none'; quizCurrent++; document.getElementById('qq'+quizCurrent).style.display=''; document.getElementById('quiz-prog').textContent='Question '+quizCurrent+' of 5'; } else { submitQuiz(); } },900); },600); }
+
+// Match game
+let matchFirst = null;
+function matchClick(el){
+  if(el.classList.contains('matched')) return;
+  if(!matchFirst){
+    el.classList.add('selected');
+    matchFirst = el;
+  } else {
+    if(matchFirst===el){ matchFirst.classList.remove('selected'); matchFirst=null; return; }
+    if(matchFirst.dataset.pair===el.dataset.pair){
+      matchFirst.classList.remove('selected');
+      matchFirst.classList.add('matched');
+      el.classList.add('matched');
+      addXP(15);
+      matchFirst=null;
+    } else {
+      matchFirst.classList.remove('selected');
+      matchFirst.classList.add('wrong-flash');
+      el.classList.add('wrong-flash');
+      let a=matchFirst,b=el;
+      matchFirst=null;
+      setTimeout(()=>{a.classList.remove('wrong-flash');b.classList.remove('wrong-flash');},500);
+    }
+  }
+}
+function resetMatch(){ document.querySelectorAll('#v2-match .match-item').forEach(el=>{ el.classList.remove('selected','matched','wrong-flash'); }); matchFirst=null; document.getElementById('v2-fb').style.display='none'; }
+
+// Hangman
+const hmWords = [{word:'STARTED',clue:'Past tense of "to begin a job"'},{word:'APPLIED',clue:'Past tense of "to formally request a role"'}];
+let hmCurrent={}; let hmMisses=0; let hmGuessed=[];
+const hmParts=['hm-head','hm-body','hm-la','hm-ra','hm-ll','hm-rl'];
+function initHangman(){ hmCurrent=hmWords[Math.floor(Math.random()*hmWords.length)]; hmMisses=0; hmGuessed=[]; document.getElementById('hm-left').textContent=6; document.getElementById('hm-clue').textContent='Clue: '+hmCurrent.clue; hmParts.forEach(id=>document.getElementById(id).setAttribute('opacity','0')); renderHMWord(); renderHMKeys(); document.getElementById('hm-fb').style.display='none'; }
+function renderHMWord(){ let box=document.getElementById('hm-word'); box.innerHTML=hmCurrent.word.split('').map(l=>`<div class="hm-letter">${hmGuessed.includes(l)?l:''}</div>`).join(''); }
+function renderHMKeys(){ let box=document.getElementById('hm-keys'); box.innerHTML='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(l=>`<button class="hm-key ${hmGuessed.includes(l)?(hmCurrent.word.includes(l)?'hit':'miss'):''}" onclick="hmGuess('${l}')" ${hmGuessed.includes(l)?'disabled':''}>${l}</button>`).join(''); }
+function hmGuess(l){ if(hmGuessed.includes(l)) return; hmGuessed.push(l); if(!hmCurrent.word.includes(l)){ hmMisses++; document.getElementById(hmParts[hmMisses-1]).setAttribute('opacity','1'); document.getElementById('hm-left').textContent=6-hmMisses; } renderHMWord(); renderHMKeys(); if(hmCurrent.word.split('').every(l=>hmGuessed.includes(l))){ showFB('hm-fb','ok','🎉 Correct! +XP'); addXP(30); } else if(hmMisses>=6){ renderHMWord(); document.getElementById('hm-word').querySelectorAll('.hm-letter').forEach((el,i)=>el.textContent=hmCurrent.word[i]); showFB('hm-fb','err','The word was: '+hmCurrent.word+'. Try again!'); } }
+initHangman();
+
+// Memory game
+const memPairs = [{a:'started',b:'empezar'},{a:'applied',b:'postular'},{a:'joined',b:'unirse'},{a:'received',b:'recibir'}];
+let memFlipped=[], memLock=false, memFound=0;
+function initMemory(){ memFlipped=[]; memLock=false; memFound=0; document.getElementById('mem-pairs').textContent='0'; let board=document.getElementById('mem-board'); let cards=[]; memPairs.forEach(({a,b})=>{ cards.push({text:a,pair:a+b}); cards.push({text:b,pair:a+b}); }); cards.sort(()=>Math.random()-.5); board.innerHTML=cards.map((c,i)=>`<div class="mem-card" data-text="${c.text}" data-pair="${c.pair}" onclick="memFlip(this)"><div class="mem-card-front">?</div><div class="mem-card-back">${c.text}</div></div>`).join(''); }
+function memFlip(card){ if(memLock||card.classList.contains('matched')||card.classList.contains('flipped')) return; card.classList.add('flipped'); memFlipped.push(card); if(memFlipped.length===2){ memLock=true; let [a,b]=memFlipped; if(a.dataset.pair===b.dataset.pair){ a.classList.add('matched'); b.classList.add('matched'); a.classList.remove('flipped'); b.classList.remove('flipped'); memFound++; addXP(15); document.getElementById('mem-pairs').textContent=memFound; memFlipped=[]; memLock=false; if(memFound===memPairs.length) showFB('v5-fb','ok','All pairs found! 🎉 +XP'); } else { setTimeout(()=>{a.classList.remove('flipped');b.classList.remove('flipped');memFlipped=[];memLock=false;},800); } } }
+initMemory();
+
+// Audio functions
+function playStory(btn){ btn.classList.add('playing'); document.getElementById('story-txt').textContent='Playing…'; if('speechSynthesis' in window){ speechSynthesis.cancel(); let u = new SpeechSynthesisUtterance(document.getElementById('v3-transcript').innerText); u.rate=0.85; u.lang='en-US'; u.onend=()=>{ btn.classList.remove('playing'); document.getElementById('story-txt').textContent='Play Story'; }; speechSynthesis.speak(u); } }
+function playDialogue(btn){ btn.classList.add('playing'); if('speechSynthesis' in window){ speechSynthesis.cancel(); let lines = ['When did you graduate?','I graduated in 2018.','Where did you work after that?','I worked at MineSafe for 4 years.','Did you manage a team?','No, I didn\'t.']; let u = new SpeechSynthesisUtterance(lines.join(' ... ')); u.rate=0.85; u.lang='en-US'; u.onend=()=>btn.classList.remove('playing'); speechSynthesis.speak(u); } }
+
+// Initialize
+initHangman();
+initMemory();
+</script>
+</body>
+</html>
