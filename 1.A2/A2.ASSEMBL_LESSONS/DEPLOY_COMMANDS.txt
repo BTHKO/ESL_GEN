@@ -1,0 +1,29 @@
+# DEPLOY BOTH WORKERS - Run from C:\Users\hkome\Desktop\Project\
+# Copy hko-content.js and hko-media.js here first, then run:
+
+cd C:\Users\hkome\Desktop\Project
+
+# 1. Deploy content worker (generates lesson HTML, stores in KV)
+npx wrangler deploy hko-content.js --name hko-content --compatibility-date 2025-01-01
+
+# 2. Add AI binding to hko-content
+npx wrangler deploy hko-content.js --name hko-content --compatibility-date 2025-01-01 --var "UNUSED=1"
+# Then in CF dashboard: hko-content > Settings > Bindings > Add > Workers AI > name: AI
+# And: Add > KV Namespace > name: KV > select existing e51e71b8efc34ecc8be226593c2afbc4
+
+# 3. Deploy media worker (generates audio via Workers AI TTS, images via Flux)
+npx wrangler deploy hko-media.js --name hko-media --compatibility-date 2025-01-01
+# Then in CF dashboard: hko-media > Settings > Bindings > Add > Workers AI > name: AI
+# And: Add > KV Namespace > name: KV > select existing e51e71b8efc34ecc8be226593c2afbc4
+
+# AFTER BINDINGS ADDED - Generate all 12 lessons:
+Invoke-RestMethod -Uri "https://hko-content.mrhkruger-content.workers.dev/generate-all" -Method POST -ContentType "application/json" -Body "{}"
+
+# View lesson 1 in browser:
+# https://hko-content.mrhkruger-content.workers.dev/lesson?n=1
+
+# Get audio for lesson 1:
+# https://hko-media.mrhkruger-content.workers.dev/audio?n=1
+
+# Get image for lesson 1:
+# https://hko-media.mrhkruger-content.workers.dev/image?n=1

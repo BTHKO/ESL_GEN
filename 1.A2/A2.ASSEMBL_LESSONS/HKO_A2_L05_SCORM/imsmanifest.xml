@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="HKO_A2_L05" version="1.1"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2
+    imscp_rootv1p1p2.xsd
+    http://www.adlnet.org/xsd/adlcp_rootv1p2
+    adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location>
+  </metadata>
+
+  <organizations default="HKO_A2_L05_ORG">
+    <organization identifier="HKO_A2_L05_ORG">
+      <title>A2 HR English — L05: I'm Going to Review the CVs Tomorrow</title>
+      <item identifier="ITEM_L05" identifierref="RES_L05">
+        <title>I'm Going to Review the CVs Tomorrow</title>
+        <adlcp:masteryscore>60</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="RES_L05" type="webcontent"
+      adlcp:scormtype="sco" href="lesson.html">
+      <file href="lesson.html"/>
+      
+    </resource>
+  </resources>
+
+</manifest>
